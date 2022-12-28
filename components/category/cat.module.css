@@ -1,0 +1,17 @@
+.card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    box-shadow: 5px 7px 10px var(--yellow);
+    border-radius: 15px;
+    margin: 1rem 5px;
+    padding: 10%;
+    font-family: 'Berlin Sans FB';
+    font-size: 1.3rem;
+}
+
+.card img{
+    width: 5rem;
+    height: 5rem;
+}

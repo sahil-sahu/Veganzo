@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --yellow: #FFCC33;
+  --red: #FE0000;
+}
+
+@font-face {
+  font-family: 'Berlin Sans FB';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Berlin Sans FB'), url('/BRLNSR.woff') format('woff');
+  }
+  
+
+  @font-face {
+  font-family: 'Berlin Sans FB Bold';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Berlin Sans FB Bold'), url('/BRLNSB.woff') format('woff');
+  }
+
+  .heading{
+    font-family: 'Amatic SC', cursive;
+    font-weight: 700;
+    font-size: 2rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    padding: 2rem;
+  }
+
+  .heading img{
+    display: inline;
+    width: 3rem;
+    height: auto;
+  }
+
+  .heading::after{
+    content: "";
+    position: absolute;
+    border-bottom: 2px solid black;
+    width: 10rem;
+    height: 3rem;
+    transform: translateY(15%);
+  }
+
+  .heading .up{
+    font-size: 2.2rem;
+  }
