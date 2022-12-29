@@ -1,15 +1,39 @@
 import styles from "./cat.module.css"
+import { useState } from "react";
+
+import ItemCard from "../card";
 
 export default function Category(){
 
+
     const categories = ["Veggies", "Fruits", "Juices", "Shakes", "Hydrators", "Exotics", "Organic", "Plants", "Salads"];
+    const item = [
+        {
+            name:"Kashmiri Apple",
+            price:"120",
+            unit:"kg",
+            img:"/dummy/apples.png"
+        },
+        {
+            name:"Avacado",
+            price:"150",
+            unit:"kg",
+            img:"/dummy/avacado.png"
+        },
+        {
+            name:"Kiwi",
+            price:"200",
+            unit:"kg",
+            img:"/dummy/kiwi.png"
+        },
+    ]
 
     return(
-        <section className="category">
+        <section className={styles.category}>
             <div className={styles.container}>
                 <h2 className="heading"><img src="/icons/orange.png" alt="" /><span>SHOP BY <span className="up">C</span>ATEGORY</span></h2>
             </div>
-            <div class="grid grid-cols-9 gap-2">
+            <div className="grid grid-cols-9 gap-2">
                 {categories.map((e)=>{
                     return (
                         <div className={styles.card}>
@@ -18,6 +42,26 @@ export default function Category(){
                         </div>
                     );
                 })}
+            </div>
+            <div className={`${styles.fruits} ${styles.cardContainer}`} >
+                <h3 className="heading"><img src="/icons/orange.png" alt="orange" /><span><span className="up">F</span>RUITS</span></h3>
+                <div className={`${styles.cardContainer} grid grid-cols-3 gap-2`}>
+                    {item.map((e)=>{
+                        return(
+                            <ItemCard item={e} />
+                        );
+                    })}
+                </div>
+            </div>
+            <div className={`${styles.vegetable} ${styles.cardContainer}`} >
+                <h3 className="heading"><img src="/icons/veggy.png" alt="vgegtable" /><span><span className="up">V</span>EGETABLES</span></h3>
+                <div className={`${styles.cardContainer} grid grid-cols-3 gap-2`}>
+                    {item.map((e)=>{
+                        return(
+                            <ItemCard item={e} />
+                        );
+                    })}
+                </div>
             </div>
             </section>
     );

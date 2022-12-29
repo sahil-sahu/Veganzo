@@ -1,3 +1,21 @@
+.category{
+    background-image: url('/assets/category/BG1.png');
+    background-repeat: no-repeat;
+    background-position: bottom left;
+    background-size: 15%;
+}
+
+.category::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 175%;
+    background-image: url('/assets/category/BG2.png');
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    z-index: -1;
+}
+
 .card{
     display: flex;
     flex-direction: column;
@@ -14,4 +32,121 @@
 .card img{
     width: 5rem;
     height: 5rem;
+}
+
+.cardContainer{
+    width: 80%;
+    min-width: 16rem;
+    margin: 1% auto;
+}
+
+.itemCard{
+    min-width: 15rem;
+    width: 80%;
+    box-shadow: inset 0px 0px 10px rgba(89, 89, 89, 0.16), 0px 0px 40px rgba(89, 89, 89, 0.25);
+    border-radius: 20px;
+    padding: 5%;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    font-family: 'Orbitron', sans-serif;
+    font-size: .9rem;
+    background-color: #fff;
+}
+
+.cardImg{
+    width: 12rem;
+    height: 12rem;
+    object-fit: contain;
+    margin: auto;
+}
+
+.itemCard h4{
+    font-family: 'Berlin Sans FB';
+    font-size: 1.5rem;
+    text-overflow: ellipsis;
+}
+
+.delivery{
+    display: flex;
+    justify-content: space-evenly;
+    gap: .8rem;
+    align-items: center;
+}
+
+.delivery img{
+    display: inline-block;
+    width: auto;
+    height: 1.75rem;
+}
+
+.delivery span{
+    font-size: .75rem;
+    letter-spacing: .8px;
+}
+
+.grid{
+    display: flex;
+    justify-content: space-between;
+    gap: 2%;
+    /* line-height: 1.3rem; */
+}
+
+.grid p{
+    margin: .5rem 0;
+}
+
+.add2Cart{
+    background-color: var(--yellow);
+    border-radius: 100rem;
+    position: absolute;
+    box-shadow: inset 0 0 10px rgba(0,0,0,.3);
+    transform: translate(225%, -60%);
+    width: 5rem;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: .9rem;
+    font-weight: 700;
+    padding: 10px;
+    cursor: pointer;
+    transition: .3s ease-in-out;
+}
+
+.add2Cart:hover{
+    box-shadow: inset 0 0 5px rgba(0,0,0,.3);
+}
+
+.add2Cart img{
+    width: 1.6rem;
+    height: auto;
+}
+
+.quantity{
+    border-radius: 10px;
+    background-color: #DFDFDF;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    height: 2.5rem;
+    width: 50%;
+    text-align: center;
+    font-weight: 700;
+    align-items: center;
+    margin: 1rem 0;
+    margin-bottom: 0;
+}
+
+.quantity > *{
+    flex: 50%;
+    width: 50%;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.quantity input{
+    align-self: stretch;
 }
