@@ -1,0 +1,116 @@
+.blog{
+    background-color: var(--pink);
+    /* overflow: hidden; */
+    height: 85vh;
+}
+
+.container{
+    width: 100vw;
+    height: 100%;
+    max-width: 100rem;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    padding: 2% 0;
+    gap: 5%;
+}
+
+.sidebar{
+    flex: 20%;
+    background-color: #fff;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.feed{
+    flex: 40%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    /* overflow: hidden; */
+    
+}
+
+.feedContainer {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.feedContainer img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 100%;
+    transition: ease .3s;
+}
+
+.knowmore{
+    position: absolute;
+    z-index: 9;
+    font-family: 'Amatic SC', cursive;
+    font-weight: 700;
+    font-size: 2rem;
+    opacity: 0;
+    transition: ease-in-out .5s;
+}
+
+.feed:hover .feedContainer img{
+    opacity: 75%;
+    transform: scale(1.05);
+    filter: blur(5px);
+}
+
+.feed:hover .knowmore{
+    opacity: 1;
+}
+
+.knowmore img{
+    width: 5rem;
+    margin: 10% auto;
+}
+
+.moreblogs{
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.article{
+    display: flex;
+    justify-content:stretch;
+    align-items: center;
+    font-family: 'Amatic SC', cursive;
+    font-weight: 700;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.article:hover img{
+    transform: rotate(-5deg);
+}
+
+.article:hover h4{
+    text-decoration: underline;
+}
+
+.article *{
+    flex: 50%;
+    width: 50%;
+    object-fit: contain;
+    transition: ease-in .3s;
+}
+
+

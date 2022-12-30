@@ -12,10 +12,9 @@ class MyDocument extends Document {
         <Head>
             <link rel="icon" href="/favicon.png" type="image/x-icon" />  
             <link rel="preconnect" href="https://fonts.googleapis.com" />
-              <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
-              <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet" />
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+            <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet" />
             </Head>
-
         <body>
           <Main />
           <NextScript />
@@ -25,4 +24,4 @@ class MyDocument extends Document {
   }
 }
 
-export default MyDocument
+export default MyDocument;

@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { NextSeo } from 'next-seo';
 import Hero from '../components/hero/hero';
 import Category from '../components/category/category';
+import Blog from '../components/blog/blog';
 
 import Header from '../components/header/header';
 
@@ -17,6 +18,7 @@ export default function Home() {
         <Header></Header>
         <Hero></Hero>
         <Category></Category>
+        <Blog></Blog>
       </main>
     </>
   )
