@@ -1,0 +1,23 @@
+.nursery{
+    background: url('/assets/organicBG.png') #ECFFBA;
+    background-repeat: no-repeat;
+    background-position: top right;
+    background-size: 15%;
+}
+
+.nurseryContainer{
+    width: 70%;
+    min-width: 16rem;
+    margin: auto;
+    padding: 2%;
+}
+
+.nurseryContainer > p{
+
+    font-family: 'Amatic SC', cursive;
+    font-weight: 700;
+    font-size: 1.7em;
+    padding: 2%;
+    line-height: 3rem;
+
+}
