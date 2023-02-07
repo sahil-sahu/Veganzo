@@ -23,10 +23,16 @@
   src: local('Berlin Sans FB Bold'), url('/BRLNSB.woff') format('woff');
   }
 
+  body{
+    width: 100vw;
+    overflow-x: hidden;
+  }
+
+
   .heading{
     font-family: 'Amatic SC', cursive;
     font-weight: 700;
-    font-size: 2rem;
+    font-size: 3rem;
     display: flex;
     gap: 1rem;
     align-items: center;
@@ -43,13 +49,13 @@
     content: "";
     position: absolute;
     border-bottom: 2px solid black;
-    width: 10rem;
+    min-width: 10rem;
     height: 3rem;
     transform: translateY(15%);
   }
 
   .heading .up{
-    font-size: 2.2rem;
+    font-size: 3.5rem;
   }
 
   .heading2{
@@ -67,3 +73,66 @@
   .heading2 img{
     width: 60%;
   }
+  
+  @media only screen and (max-width: 1000px){
+
+    .heading{
+      font-size: 2.5rem;
+      padding: .8rem;
+    }
+    .heading .up{
+      font-size: 2.8rem;
+    }
+    .heading2{
+      font-family: 'Amatic SC', cursive;
+      font-weight: 700;
+      font-size: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      gap: 1rem;
+      align-items: center;
+      padding: 2%;
+      border-bottom: solid black 2px;
+    }
+  
+    .heading2 img{
+      width: 75%;
+    }
+  }  
+  @media only screen and (max-width: 550px){
+    .swiper-pagination {
+      display: none;
+    }
+
+    .heading{
+      font-size: 2rem;
+      padding: .8rem;
+      margin: 5% auto;
+    }
+    .heading .up{
+      font-size: 2.2rem;
+    }
+    .heading::after{
+      width: 60%;
+      height: 13%;
+      transform: translateY(15%);
+    }
+    .heading2{
+      font-family: 'Amatic SC', cursive;
+      font-weight: 700;
+      font-size: 2rem;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      gap: 1rem;
+      align-items: center;
+      padding: 2%;
+      border-bottom: solid black 2px;
+    }
+  
+    .heading2 img{
+      width: 30%;
+    }
+  }
+

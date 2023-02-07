@@ -19,8 +19,8 @@ export default function Home() {
           title="Veganzo"
           description=""
         />
-      <main>
-        <Header></Header>
+      <Header></Header>
+      <main id="main">
         <Hero></Hero>
         <Category></Category>
         <Blog></Blog>

@@ -33,7 +33,7 @@ export default function Category(){
             <div className={styles.container}>
                 <h2 className="heading"><img src="/icons/orange.png" alt="" /><span>SHOP BY <span className="up">C</span>ATEGORY</span></h2>
             </div>
-            <div className="grid grid-cols-9 gap-2">
+            <div className="grid grid-cols-3 gap-2 md:grid-cols-9" style={{padding:10,}}>
                 {categories.map((e)=>{
                     return (
                         <div className={styles.card}>
@@ -45,7 +45,7 @@ export default function Category(){
             </div>
             <div className={`${styles.fruits} ${styles.cardContainer}`} >
                 <h3 className="heading"><img src="/icons/orange.png" alt="orange" /><span><span className="up">F</span>RUITS</span></h3>
-                <div className={`${styles.cardContainer} grid grid-cols-3 gap-2`}>
+                <div className={`${styles.cardContainer} grid grid-cols-2 gap-2 md:grid-cols-3`}>
                     {item.map((e)=>{
                         return(
                             <ItemCard item={e} />
@@ -55,7 +55,7 @@ export default function Category(){
             </div>
             <div className={`${styles.vegetable} ${styles.cardContainer}`} >
                 <h3 className="heading"><img src="/icons/veggy.png" alt="vgegtable" /><span><span className="up">V</span>EGETABLES</span></h3>
-                <div className={`${styles.cardContainer} grid grid-cols-3 gap-2`}>
+                <div className={`${styles.cardContainer} grid grid-cols-2 gap-2 md:grid-cols-3`}>
                     {item.map((e)=>{
                         return(
                             <ItemCard item={e} />

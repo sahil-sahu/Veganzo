@@ -21,3 +21,31 @@
     line-height: 3rem;
 
 }
+@media only screen and (max-width: 1000px){
+    .nurseryContainer{
+        width: 80%;
+        min-width: 16rem;
+        margin: auto;
+        padding: 2%;
+    }
+    .nursery{
+        background: url('/assets/organicBG.png') #ECFFBA;
+        background-repeat: no-repeat;
+        background-position: top right;
+        background-size: 30%;
+    }
+}
+@media only screen and (max-width: 550px){
+    .nurseryContainer{
+        width: 100%;
+        min-width: 16rem;
+        margin: auto;
+        padding: 2%;
+    }
+    .nursery{
+        background: url('/assets/organicBG.png') #ECFFBA;
+        background-repeat: no-repeat;
+        background-position: top right;
+        background-size: 60%;
+    }
+}

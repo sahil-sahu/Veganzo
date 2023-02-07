@@ -32,7 +32,7 @@ export default function Nursery(){
                 <p>
                     GET BEST OF <span className="up">O</span>RGANIC VEGGIES, FRUITS AND PLANTS FROM YOUR NIEGHBOUR NURSERY <br /> BE A REASON TO PROMOTE GREEENARY
                 </p>
-                <div className={`${styles.cardContainer} grid grid-cols-3 gap-2`}>
+                <div className={`${styles.cardContainer} grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-3`}>
                     {item.map((e)=>{
                         return(
                             <ItemCard item={e} />

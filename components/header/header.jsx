@@ -30,7 +30,32 @@ export default function Header(){
                         <li><a href=""><Image width={25} height={25} src={"/header/profile.svg"} alt="❤️"></Image><span>PROFILE</span></a></li>
                     </ul>
                 </div>
+                <div className={styles.toggle}>
+                    <div className={styles.upToggle}></div>
+                    <div className={styles.midToggle}></div>
+                    <div className={styles.downToggle}></div>
+                </div>
             </nav>
+                <div className={styles.toggleContainer}>
+                    <div className={styles.navItems}>
+                        <ul>
+                            <li><a href="">1</a></li>
+                            <li><a href="">2</a></li>
+                            <li><a href="">33</a></li>
+                            <li><a href="">4</a></li>
+                            <li><a href="">5</a></li>
+                        </ul>
+                    </div>
+                    <div className={styles.socials}>
+                    <ul>
+                            <li><a href="">1</a></li>
+                            <li><a href="">2</a></li>
+                            <li><a href="">33</a></li>
+                            <li><a href="">4</a></li>
+                            <li><a href="">5</a></li>
+                    </ul>
+                    </div>
+                </div>
         </header>
     )
 }

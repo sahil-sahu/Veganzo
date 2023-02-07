@@ -113,4 +113,165 @@
     transition: ease-in .3s;
 }
 
+@media only screen and (max-width: 1000px){
+    .container{
+        display: flexbox;
+        flex-direction: row;
+        align-items: stretch;
+        justify-content: stretch;
+        -webkit-flex-wrap: wrap;
+        flex-wrap: wrap;
+        padding: 0;
+        gap: 0;
+    }
 
+    .sidebar{
+        flex: 30%;
+        flex-grow: 1;
+        background-color: #fff;
+        height: auto;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        flex-direction: column;
+        padding: 2%;
+    }
+
+    .blog{
+        height: auto;
+    }
+    
+    .container{
+        min-height: 85vh;
+    }
+    
+
+    .container{
+        min-height: 75vh;
+        /* overflow: hidden; */
+        /* margin-bottom: calc(50vw - 15%); */
+    }
+
+    .feed{
+        flex: 70%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        /* overflow: hidden; */
+        
+    }
+
+    .moreblogs{
+        flex-direction: row;
+        background-color: var(--pink);
+        justify-content: space-between;
+        align-items: center;
+        flex: 80%;
+        height: 60%;
+    }
+
+    .article{
+        display: flex;
+        flex-direction: column;
+        justify-content:stretch;
+        align-items: center;
+        font-family: 'Amatic SC', cursive;
+        font-weight: 700;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    .article *{
+        flex: 1;
+        width: 65%;
+        object-fit: contain;
+        transition: ease-in .3s;
+        text-align: center;
+    }
+
+    .knowmore{
+        position: absolute;
+        z-index: 9;
+        font-family: 'Amatic SC', cursive;
+        font-weight: 700;
+        font-size: 1.5rem;
+        opacity: 0;
+        transition: ease-in-out .5s;
+    }
+
+    .knowmore img{
+        width: 3rem;
+        margin: 10% auto;
+    }
+}
+
+@media only screen and (max-width: 550px){
+    .container{
+        flex-direction: column;
+        padding: 0;
+        gap: 0;
+    }
+
+    .sidebar{
+        flex: 20%;
+        background-color: #fff;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        padding: 2%;
+    }
+
+    .blog{
+        background-color: var(--pink);
+        /* overflow: hidden; */
+        height: auto;
+        margin: unset;
+    }
+
+    .moreblogs{
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1%;
+    }
+
+    .article{
+        display: flex;
+        flex-direction: column;
+        justify-content:stretch;
+        align-items: center;
+        font-family: 'Amatic SC', cursive;
+        font-weight: 700;
+        font-size: 1.2rem;
+        cursor: pointer;
+    }
+
+    .article *{
+        flex: 1;
+        width: 90%;
+        object-fit: contain;
+        transition: ease-in .3s;
+        text-align: center;
+    }
+
+    .knowmore{
+        position: absolute;
+        z-index: 9;
+        font-family: 'Amatic SC', cursive;
+        font-weight: 700;
+        font-size: 1.5rem;
+        opacity: 0;
+        transition: ease-in-out .5s;
+    }
+
+    .knowmore img{
+        width: 3rem;
+        margin: 10% auto;
+    }
+}

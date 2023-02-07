@@ -30,6 +30,11 @@
     text-align: center;
 }
 
+.toggleContainer{
+    display: none;
+
+}
+
 .brand a{
     position: absolute;
     transform: translate(-50%,-35%);
@@ -113,3 +118,153 @@
 .navactions ul li img{
     margin: auto;
 }
+
+@media only screen and (max-width: 800px) {
+    .brand{
+        font-size: 3rem;
+    }
+
+    .navContent ul{
+        font-size: 1.1rem;
+    }
+
+    .navactions ul{
+        font-size: 1rem;
+    }
+  }
+
+  @media only screen and (max-width: 550px) {
+
+    .Navbar{
+        border-bottom-left-radius: 10rem;
+    }
+
+    .Navbar nav{
+        z-index: 9999;
+    }
+
+    .navContent, .navactions {
+        display: none;
+    }
+    .brand{
+        font-size: 2.5rem;
+        margin: 1rem;
+        flex: 75%;
+        text-align: initial;
+        padding-left: 17%;
+    }
+
+    .brand span::before{
+        width: 1.2rem;
+        transform: translateY(-6px);
+        height: 1.2rem;
+    }
+
+    .brand::before{
+        display: none;
+    }
+    .toggle{
+        padding: 1rem .6rem;
+        transform: translateY(25%);
+        cursor: pointer;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 600rem;
+        box-shadow: .5rem -20px 16px 60px var(--yellow);
+    }
+    .toggle div{
+        border: 2px black solid;
+        width: 100%;
+        background-color: black;
+        margin: 5px;
+        transition: ease-in-out .4s;
+    }
+
+    .toggle:hover .midToggle{
+        width: 0;
+        border-color: transparent;
+        background-color: transparent;
+    }
+
+    .toggle:hover .upToggle{
+        animation: upToggle 0.8s ease-in-out forwards;
+    }
+
+    .toggle:hover .downToggle{
+        animation: downToggle 0.8s ease-in-out forwards;
+    }
+
+    @keyframes upToggle {
+        0%{
+            transform: translateY(0%);
+        }
+        30%{
+            transform: translateY(300%);
+        }
+        100%{
+           transform: translateY(300%) rotate(45deg); 
+        }
+    }
+
+    @keyframes downToggle {
+        30%{
+            transform: translateY(-250%);
+        }
+        100%{
+           transform: translateY(-250%) rotate(-45deg); 
+        }
+    }
+
+    .toggleContainer{
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+        top: 2%;
+        left: 50%;
+        transform: translate(100%,0%);
+        z-index: -1;
+        display: block;
+
+    }
+
+    .socials{
+        background-color: var(--yellow);
+        box-shadow: 0 0px 10px 30px var(--yellow);
+        width: 100%;
+        bottom: 0;
+        position: absolute;
+        height: 5vh;
+    }
+    
+    .navItems{
+        background-color: var(--yellow);
+        box-shadow: 0 -30px 10px 30px var(--yellow);
+        width: 60%;
+        height: 95vh;
+        transform: translateX(60%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .navItems ul{
+        display: flex;
+        margin-top: 40%;
+        justify-content: stretch;
+        align-items: flex-end;
+        flex-direction: column;
+        height: 75%;
+        width: 100%;
+    }
+
+    .navItems ul li{
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 5px;
+        font-size: 2rem;
+        font-weight: 700;
+    }
+    
+  }  
