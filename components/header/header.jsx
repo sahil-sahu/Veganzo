@@ -6,6 +6,18 @@ export default function Header(){
 
     const [navbarOpen, setNavbarOpen] = useState(false);
 
+    let style = null;
+
+    if (navbarOpen){
+        style = {
+            transform: "translate(-50%,0%)",
+        }
+    }else {
+        style = {
+            transform: "translate(100%,0%)",
+        }
+    }
+
     return(
         <header className={styles.Navbar}>
             <nav>
@@ -30,13 +42,44 @@ export default function Header(){
                         <li><a href=""><Image width={25} height={25} src={"/header/profile.svg"} alt="❤️"></Image><span>PROFILE</span></a></li>
                     </ul>
                 </div>
-                <div className={styles.toggle}>
-                    <div className={styles.upToggle}></div>
-                    <div className={styles.midToggle}></div>
-                    <div className={styles.downToggle}></div>
+                <div className={styles.toggle} onClick={()=>{
+                    if(navbarOpen){
+                        setNavbarOpen(false);
+                    }else{
+                        setNavbarOpen(true);
+                    }
+                }}>
+                    <div className={styles.upToggle} style={
+                        (navbarOpen? {
+                            transform: "translateY(300%) rotate(45deg)",
+                        } : {transform: "unset",})
+                    }></div>
+                    <div className={styles.midToggle} style={
+                        (navbarOpen? {
+                            visibility: "hidden",
+                        } : {visibility: "unset",})
+                    }></div>
+                    <div className={styles.downToggle} style={
+                        (navbarOpen? {
+                            transform: "translateY(-250%) rotate(-45deg)",
+                        } : {transform: "unset",})
+                    }></div>
+                </div>
+                <div className={styles.bottomBar} style={
+                    (navbarOpen? {
+                        top: 'calc(100vh)',
+                    } : {top: 'calc(100vh - 2rem)',})
+                }>
+                    <ul>
+                        <li><a href="">yo</a></li>
+                        <li><a href="">bro</a></li>
+                        <li><a href="">yup</a></li>
+                    </ul>
                 </div>
             </nav>
-                <div className={styles.toggleContainer}>
+                <div className={styles.toggleContainer} style={style} onClick={()=>{
+                    setNavbarOpen(false)
+                }}>
                     <div className={styles.navItems}>
                         <ul>
                             <li><a href="">1</a></li>
