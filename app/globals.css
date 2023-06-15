@@ -1,0 +1,45 @@
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.MuiDataGrid-main > div:nth-child(3){
+  background-color: pink !important;
+  display: none !important;
+}
+
+@font-face {
+  font-family: 'Inter Sans';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/inter-webfont.woff2') format('woff2'),
+         url('/inter-webfont.woff') format('woff');;
+  }
+
+body {
+  font-family: 'Inter Sans'!important;
+}  
+
+.files-dropzone{
+  border-radius: 10px;
+  border: 2px solid black;
+  text-align: center;
+  padding: 2%;
+
+}
