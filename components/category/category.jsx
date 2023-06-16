@@ -34,9 +34,9 @@ export default function Category(){
                 <h2 className="heading"><img src="/icons/orange.png" alt="" /><span>SHOP BY <span className="up">C</span>ATEGORY</span></h2>
             </div>
             <div className="grid grid-cols-3 gap-2 md:grid-cols-9" style={{padding:10,}}>
-                {categories.map((e)=>{
+                {categories.map((e,i)=>{
                     return (
-                        <div className={styles.card}>
+                        <div key={i} className={styles.card}>
                             <img src={`/assets/category/${e.toLowerCase()}.png`} alt={e} />
                             <h4>{e}</h4>
                         </div>
@@ -46,9 +46,9 @@ export default function Category(){
             <div className={`${styles.fruits} ${styles.cardContainer}`} >
                 <h3 className="heading"><img src="/icons/orange.png" alt="orange" /><span><span className="up">F</span>RUITS</span></h3>
                 <div className={`${styles.cardContainer} grid grid-cols-2 gap-2 md:grid-cols-3`}>
-                    {item.map((e)=>{
+                    {item.map((e,i)=>{
                         return(
-                            <ItemCard item={e} />
+                            <ItemCard key={i} item={e} />
                         );
                     })}
                 </div>
@@ -56,9 +56,9 @@ export default function Category(){
             <div className={`${styles.vegetable} ${styles.cardContainer}`} >
                 <h3 className="heading"><img src="/icons/veggy.png" alt="vgegtable" /><span><span className="up">V</span>EGETABLES</span></h3>
                 <div className={`${styles.cardContainer} grid grid-cols-2 gap-2 md:grid-cols-3`}>
-                    {item.map((e)=>{
+                    {item.map((e,i)=>{
                         return(
-                            <ItemCard item={e} />
+                            <ItemCard key={i} item={e} />
                         );
                     })}
                 </div>

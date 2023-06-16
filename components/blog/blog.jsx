@@ -32,10 +32,10 @@ export default function Blog(){
                     </div>
                 </div>
                 <div className={styles.moreblogs}>
-                    {article.map((e)=>{
+                    {article.map((e,i)=>{
                         return(
-                            <div className={styles.article}>
-                                <img src={e.img} alt={e.title} srcset="" />
+                            <div key={i} className={styles.article}>
+                                <img src={e.img} alt={e.title} srcSet="" />
                                 <h4>{e.title}</h4>
                             </div>
                         );
