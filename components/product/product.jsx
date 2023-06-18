@@ -57,9 +57,9 @@ export default function Product(){
                     <h2 className="heading2"><span>OUR <br/> PRODUCTS</span></h2>
             </div>
             <div className={`${styles.productContainer} grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-3`}>
-                {dummy.map((e)=>{
+                {dummy.map((e,i)=>{
                     return(
-                        <Card2 load={e} />
+                        <Card2 key={i} load={e} />
                     );
                 })}
             </div>

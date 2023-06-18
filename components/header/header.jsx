@@ -58,7 +58,7 @@ export default function Header(props){
                         </svg>
                         <form onSubmit={handleSubmit} method="get">
                         <input placeholder="Super Shake" value={search} type="search" onChange={loadSuggestions} onBlur={()=> {
-                            setTimeout(()=> {setSuggestion(false)},200)
+                            // setTimeout(()=> {setSuggestion(false)},200)
                         }}/>
                         </form>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -73,12 +73,12 @@ export default function Header(props){
                         {
                             suggestion.map(ele =>{
                                 return(
-                                    <Link href={`/s?q=${ele.name}`}>
-                                        <li key={ele.id}>
+                                    <li key={ele.id}>
+                                        <Link href={`/s?q=${ele.name}`}>
                                             <Image src={ele.img} width={48} height={48} alt={ele.name} />
                                             <p>{ele.name}</p>
-                                        </li>
-                                    </Link>
+                                        </Link>
+                                    </li>
                                 )
                             })
                         }

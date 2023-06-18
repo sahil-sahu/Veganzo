@@ -125,8 +125,10 @@
     /* width: 50vw; */
     /* width: 100% !important; */
 }
-
 .suggestion li{
+    width: 100%;
+}
+.suggestion li a{
     display: flex;
     align-items: center;
     width: 100%;
