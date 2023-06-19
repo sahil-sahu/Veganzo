@@ -10,7 +10,7 @@ export default function Header(props){
 
     const [navbarOpen, setNavbarOpen] = useState(false);
     const [suggestion, setSuggestion] = useState(false);
-    const [search, setSearch] = useState();
+    const [search, setSearch] = useState(props.q?props.q: '');
     const router = useRouter();
 
     let style = null;
@@ -33,7 +33,7 @@ export default function Header(props){
         }
         let data = await typesense.collections('inventory').documents().search({
             'q'         : e.target.value,
-            'query_by'  : 'name',
+            'query_by'  : 'name, type',
           })
         setSuggestion([...data.hits.map((e)=>{
             return { id : e.document.id, name: e.document.name, img:e.document.cover }
@@ -49,7 +49,7 @@ export default function Header(props){
         <header className={styles.Navbar}>
             <nav>
                 <div className={styles.brand}>
-                    <a href="#">V<span>E</span>GANZO</a>
+                    <Link href={'/'}>V<span>E</span>GANZO</Link>
                 </div>
                 <div className={styles.navContent}>
                     <div className={styles.searchbar}>
@@ -58,7 +58,7 @@ export default function Header(props){
                         </svg>
                         <form onSubmit={handleSubmit} method="get">
                         <input placeholder="Super Shake" value={search} type="search" onChange={loadSuggestions} onBlur={()=> {
-                            // setTimeout(()=> {setSuggestion(false)},200)
+                            setTimeout(()=> {setSuggestion(false)},200)
                         }}/>
                         </form>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -85,12 +85,12 @@ export default function Header(props){
                         </ul>}
                     </div>
                     <ul>
-                        <li><a href="#">HOME</a></li>
-                        <li><a href="#">ABOUT</a></li>
-                        <li><a href="#">CATEGORY</a></li>
-                        <li><a href="#">PARTNERS</a></li>
-                        <li><a href="#">FEED</a></li>
-                        <li><a href="#">CONTACT</a></li>
+                        <li><Link href="/">HOME</Link></li>
+                        <li><Link href="#">ABOUT</Link></li>
+                        <li><Link href="#">CATEGORY</Link></li>
+                        <li><Link href="#">PARTNERS</Link></li>
+                        <li><Link href="#">FEED</Link></li>
+                        <li><Link href="#">CONTACT</Link></li>
                     </ul>
                 </div>
                 <div className={styles.navactions}>

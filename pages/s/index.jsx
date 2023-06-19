@@ -1,4 +1,5 @@
 import styles from "../../styles/Home.module.css"
+import srchstyles from "../../components/search/search.module.css"
 
 import Head from 'next/head'
 import Image from 'next/image'
@@ -12,9 +13,49 @@ import Recipe from '../../components/recipes/recipes';
 import Nursery from '../../components/nursery/nursery';
 
 import Header from '../../components/header/header';
+import ItemCard from "../../components/card";
+import { useEffect, useState } from "react"
+import { typesense } from "../../typesense/config"
 
-export default function Home() {
-    const router = useRouter()
+const item = [
+  {
+      name:"Kashmiri Apple",
+      price:"120",
+      unit:"kg",
+      img:"/dummy/apples.png"
+  },
+  {
+      name:"Avacado",
+      price:"150",
+      unit:"kg",
+      img:"/dummy/avacado.png"
+  },
+  {
+      name:"Kiwi",
+      price:"200",
+      unit:"kg",
+      img:"/dummy/kiwi.png"
+  },
+]
+
+export default function Search({mainData, q}) {
+    const router = useRouter();
+    const [results, setResult] = useState(mainData);
+    const [search, setSearch] = useState(q);
+    
+    if(router.query.q != search){
+      let query = router.query.q;
+      (async function(){
+        let data = await typesense.collections('inventory').documents().search({
+          'q': query,
+          'query_by'  : 'name, type',
+        });
+        setResult(data.hits.map((e)=>{
+          return { id : e.document.id, name: e.document.name, img:e.document.cover, price:"120", unit:"kg", }
+        }));
+        setSearch(query);
+      }())
+    }
 
   return (
     <>
@@ -22,9 +63,17 @@ export default function Home() {
           title="Veganzo"
           description=""
         />
-      <Header q={router.query}></Header>
+      <Header q={router.query.q}></Header>
       <main id="main">
-        <Category></Category>
+        <section className={srchstyles.searchResults}>
+        <div className={`${srchstyles.cardContainer} grid grid-cols-2 gap-2 md:grid-cols-3`}>
+                    {results.map((e,i)=>{
+                        return(
+                            <ItemCard key={i} item={e} />
+                        );
+                    })}
+        </div>
+        </section>
         <Blog></Blog>
         <Product></Product>
         <Recipe></Recipe>
@@ -63,4 +112,28 @@ export default function Home() {
       </main>
     </>
   )
+}
+
+export async function getServerSideProps(context) {
+  const query = context.query.q;
+  if (!query){
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    }
+  }
+  let data = await typesense.collections('inventory').documents().search({
+    'q': query,
+     'query_by'  : 'name, type',
+  });
+  return {
+    props: {
+      mainData: data.hits.map((e)=>{
+        return { id : e.document.id, name: e.document.name, img:e.document.cover, price:"120", unit:"kg", }
+      }),
+      q: query,
+    },
+  }
 }
