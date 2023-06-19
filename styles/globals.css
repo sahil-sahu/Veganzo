@@ -15,7 +15,22 @@
   src: local('Berlin Sans FB'), url('/BRLNSR.woff') format('woff');
   }
   
+#micOn{
+    stroke: red !important;
+    animation: blink 2s ease-in-out infinite;
+}
 
+@keyframes blink {
+  0%{
+      opacity: 1;
+  }
+  50%{
+      opacity: 0;
+  }
+  100%{
+      opacity: 1;
+  }
+}
   @font-face {
   font-family: 'Berlin Sans FB Bold';
   font-style: normal;

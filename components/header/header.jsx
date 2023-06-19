@@ -8,8 +8,10 @@ import {useRouter} from 'next/router'
 
 export default function Header(props){
 
+    const [interimTranscript, setInterimTranscript] = useState('');
     const [navbarOpen, setNavbarOpen] = useState(false);
     const [suggestion, setSuggestion] = useState(false);
+    const [animate, setAnimate] = useState('');
     const [search, setSearch] = useState(props.q?props.q: '');
     const router = useRouter();
 
@@ -45,6 +47,50 @@ export default function Header(props){
         router.push(`/s?q=${search}`)
     }
 
+    const handleSpeechRecognition = () => {
+        const recognition = new window.webkitSpeechRecognition();
+        setAnimate('micOn');
+        setSearch('');
+    
+        // Set recognition parameters
+        recognition.continuous = true;
+        recognition.interimResults = true;
+    
+        recognition.onresult = (event) => {
+          let interimTranscript = '';
+          let finalTranscript = '';
+    
+          // Loop through the result's alternatives
+          for (let i = event.resultIndex; i < event.results.length; i++) {
+            const transcript = event.results[i][0].transcript;
+    
+            // Check if the result is final or interim
+            if (event.results[i].isFinal) {
+              finalTranscript += transcript + ' ';
+              setSearch(finalTranscript);
+              setAnimate('') ;
+              recognition.stop();
+              router.push(`/s?q=${finalTranscript}`)
+            } else {
+              interimTranscript += transcript;
+            }
+          }
+    
+          // Update the transcripts
+          setInterimTranscript(interimTranscript);
+        };
+    
+        recognition.onerror = (event) => {
+          window.alert('Please Try');
+        };
+    
+        recognition.onend = () => {
+          console.log('Speech recognition ended');
+        };
+    
+        recognition.start();
+      };
+
     return(
         <header className={styles.Navbar}>
             <nav>
@@ -57,11 +103,11 @@ export default function Header(props){
                             <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                         </svg>
                         <form onSubmit={handleSubmit} method="get">
-                        <input placeholder="Super Shake" value={search} type="search" onChange={loadSuggestions} onBlur={()=> {
+                        <input placeholder={interimTranscript!= ''? interimTranscript:"Super Shake"} value={search} type="search" onChange={loadSuggestions} onBlur={()=> {
                             setTimeout(()=> {setSuggestion(false)},200)
                         }}/>
                         </form>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                        <svg onClick={handleSpeechRecognition} id={animate} xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" cursor={'pointer'} viewBox="0 0 24 24" strokeWidth={1.5} className="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z" />
                         </svg>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
