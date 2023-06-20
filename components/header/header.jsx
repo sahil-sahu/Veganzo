@@ -13,6 +13,7 @@ export default function Header(props){
     const [suggestion, setSuggestion] = useState(false);
     const [animate, setAnimate] = useState('');
     const [search, setSearch] = useState(props.q?props.q: '');
+    const [profile, setProfile] = useState(false);
     const router = useRouter();
 
     let style = null;
@@ -141,9 +142,8 @@ export default function Header(props){
                 </div>
                 <div className={styles.navactions}>
                     <ul>
-                        <li><a href=""><Image width={25} height={25} src={"/header/wishlist.svg"} alt="❤️"></Image><span>WISHLIST</span></a></li>
                         <li><a href=""><Image width={25} height={25} src={"/header/cart.svg"} alt="❤️"></Image><span>CART</span></a></li>
-                        <li><a href=""><Image width={25} height={25} src={"/header/profile.svg"} alt="❤️"></Image><span>PROFILE</span></a></li>
+                        <li onClick={()=> setProfile(true)}  className={styles.profile}><Image width={25} height={25} src={"/header/profile.svg"} alt="❤️"></Image><span>PROFILE</span></li>
                     </ul>
                 </div>
                 <div className={styles.toggle} onClick={()=>{
@@ -203,6 +203,36 @@ export default function Header(props){
                     </ul>
                     </div>
                 </div>
+                {
+                                profile && <div onClick={()=> setProfile(false)} className={styles.profileIContain}>
+                                    <div className={styles.proFileDropdown}>
+                                <div className={styles.account}>
+                                    <h4>
+                                        Hi, Bro
+                                    </h4>
+                                </div>
+                                <Link href={'/account/orders'} className={styles.dropItem}>
+                                    <Image className={styles.toggle1} width={30} height={30} src={'/icons/system-solid-64-shopping-bag (1).svg'}></Image>
+                                    <Image className={styles.toggle0} width={30} height={30} src={'/icons/system-solid-64-shopping-bag.webp'}></Image>
+                                    My Orders
+                                </Link>
+                                <Link href={'/account/'} className={styles.profileI}>
+                                    <Image className={styles.toggle1} width={30} height={30} src={'/icons/profileI.svg'}></Image>
+                                    <Image className={styles.toggle0} width={30} height={30} src={'/icons/system-solid-8-account (2).webp'}></Image>
+                                    Profile
+                                </Link>
+                                <Link href={'/account/addresses'} className={styles.dropItem}>
+                                    <Image className={styles.toggle1} width={30} height={30} src={'/icons/system-solid-41-home.svg'}></Image>
+                                    <Image className={styles.toggle0} width={30} height={30} src={'/icons/system-solid-41-home.webp'}></Image>
+                                    Address
+                                </Link>
+                                <a href="#" className={styles.dropItem}>
+                                    Logout
+                                </a>
+                                
+                            </div>
+                                </div>
+                            }
         </header>
     )
 }

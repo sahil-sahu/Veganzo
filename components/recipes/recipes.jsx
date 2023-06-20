@@ -21,7 +21,7 @@ export default function Recipe(){
     return(
         <section className={styles.recipes}>
             <div className={styles.recipeContainer}>
-                <h2 className="heading"><img src="/icons/reccipe.png" alt="🥕" /><span><span>H</span>EALTHLY RECIPES</span></h2>
+                <h2 className="heading"><img src="/icons/recipe.png" alt="🥕" /><span><span>H</span>EALTHLY RECIPES</span></h2>
                 <div className={`${styles.cardContainer} grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-3`}>
                     {item.map((e)=>{
                         return(
