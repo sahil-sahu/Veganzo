@@ -1,0 +1,168 @@
+.cart{
+    padding-top: 13%;
+    padding-bottom: 5%;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #fff;
+    background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23aaaaaa' fill-opacity='0.4'%3E%3Cpath d='M50 50c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10zM10 10c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10S0 25.523 0 20s4.477-10 10-10zm10 8c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm40 40c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.cartContainer{
+    margin: auto;
+    width: 65%;
+    max-width: 60rem;
+    background-color: #fff;
+    border-radius: 25px;
+    border: 2px solid #ACCEB0;
+    padding: 1rem 1.5rem;
+    font-family: 'Berlin Sans FB', Helvetica, sans-serif;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+}
+
+.cartContainer > *{
+    flex: 50%;
+}
+
+.cartContainer h3{
+    font-family: 'Berlin Sans FB', Helvetica, sans-serif;
+    display: inline;
+    line-height: 2rem;
+    font-size: 3rem;
+    letter-spacing: 0;
+    border-bottom: #000 solid 2px;
+    padding: .5rem;
+}
+
+.cartNum{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 5rem;
+    border: 2px solid #D9D9D9;
+    border-radius: 600px;
+}
+.cartContainer ul{
+    padding: 1.5rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.cartContainer li{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    max-width: 25rem;
+}
+
+.cartNum > *{
+    padding: 3px;
+    width: 40px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.radio{
+    width: 15px;
+    height: 15px;
+    background-color: #ACCEB0;
+    border-radius: 100%;
+}
+
+.itemTotal{
+    font-size: 1.5rem;
+}
+
+.cartTotal{
+    font-size: 1.75rem;
+    font-family: 'Berlin Sans FB', Helvetica, sans-serif;
+    color: #000;
+    display: flex;
+    max-width: 22rem;
+    align-items: baseline;
+    justify-content: space-around;
+}
+
+.spread{
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    line-height: 1.2rem;
+}
+.spread p{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.5rem;
+}
+.spread small{
+    font-size: .8rem;
+    text-align: center;
+    width: 100%;
+    color: #94b598;
+
+}
+
+.process{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+}
+
+.process h4{
+    font-size: 1.75rem;
+}
+
+.slide{
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 2rem;
+}
+
+.content{
+    padding: 1rem 1.5rem;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1), inset 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 25px;
+    margin: 1rem;
+}
+
+.line{
+    border-left: #a1a1a1 solid 2.5px;
+    position: relative;
+    margin-top: 12%;
+    /* padding-top: 13%; */
+}
+
+.process .radio{
+    position: absolute;
+    transform: translateX(-8px);
+}
+
+.line .radio{
+    animation: breathing 2s infinite;
+    border-radius: 100%;
+    border: #94b598 solid 3px;
+    background-color: #fff;
+    scale: 1.75;
+    transform-origin: 0px;
+}
+
+.line2{
+    border-left: #a1a1a1 solid 2.5px;
+    position: relative;
+    padding-top: 12%;
+}
+.line3{
+    border-left: #a1a1a1 solid 2.5px;
+    position: relative;
+    padding-top: 18%;
+    margin-bottom: 15%;
+}

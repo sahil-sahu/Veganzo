@@ -7,8 +7,44 @@ import { NextSeo } from 'next-seo';
 import Header from '../../components/header/header';
 import Recipe from "../../components/recipes/recipes";
 import Nursery from "../../components/nursery/nursery";
+import { useSelector, useDispatch } from "react-redux";
+import { Input } from "@material-tailwind/react";
+import { useState } from "react";
+import { doc, updateDoc } from "firebase/firestore";
+import { database } from "../../firebase/config";
+import { load } from "../../redux/fireAuth";
+import { useRouter } from "next/router";
 
 export default function Home() {
+  const { auth, name, email, phone, id } = useSelector(state => state.authCheck);
+  const dispatch = useDispatch();
+  const [edit, setEdit] = useState(false);
+  const [Ename,setEname] = useState(name);
+  const [Email,setEmail] = useState(email);
+  const router = useRouter();
+  if(!auth)
+    router.push(`/`);
+
+  const handleEdit = async () =>{
+    if (edit) {
+      let docRef = doc(database, 'users', id);
+      await updateDoc(docRef,{
+        name:Ename,
+        email:Email,
+      });
+      dispatch(load({
+        name:Ename,
+        email:Email,
+        phone:phone,
+        id:id,
+        auth,
+      }))
+      setEdit(false);
+    } else {
+      setEdit(true);
+    }
+  }
+
   return (
     <>
       <NextSeo
@@ -24,12 +60,24 @@ export default function Home() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
               <div>
-                <h4>
-                  Name : Simba
-                </h4>
-                <h4>
-                  Phone : +919078101920
-                </h4>
+              <button className={styles.edit} onClick={handleEdit}>{edit?`Done`:`Edit`}</button>
+                {
+                  !edit?<>
+                    <h4>
+                      Name : {name}
+                    </h4>
+                    <h4>
+                      Phone : +91{phone}
+                    </h4>
+                    <h4>
+                      E-mail : {email}
+                    </h4>
+                  </>: <div className={`flex flex-col w-72 gap-6 ${styles.editInput}`}>
+                    <br />
+                    <input variant="standard" placeholder="Name" value={Ename} label="Name" onChange={(e)=> setEname(e.target.value)} />
+                    <input variant="standard" type="email" placeholder="E-mail" value={Email} label="Email" onChange={(e)=> setEmail(e.target.value)} />
+                </div>
+                }
               </div>
             </div>
             <Link href={`account/orders`}>

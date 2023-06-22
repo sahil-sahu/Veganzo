@@ -1,5 +1,3 @@
-import styles from "../../styles/Home.module.css"
-
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from "next/link";
@@ -7,6 +5,9 @@ import { NextSeo } from 'next-seo';
 import Header from '../../components/header/header';
 import Recipe from "../../components/recipes/recipes";
 import Nursery from "../../components/nursery/nursery";
+
+import styles from '../../components/accounts/address.module.css'
+import Address from '../../components/accounts/address';
 
 export default function Home() {
   return (
@@ -17,6 +18,22 @@ export default function Home() {
         />
       <Header></Header>
       <main id="main">
+        <div className={styles.address}>
+          <div className={styles.addressContainer}>
+            <h2>
+              List of Addresses
+            </h2>
+            <form>
+              <Address load={{
+                name: `Sahil`,
+                phone: `6565454654`,
+                address: `loremdisjhfuydguyfgduygfuyhg`,
+                long: `85`,
+                lat: `85`,
+              }} />
+            </form>
+          </div>
+        </div>
         <Recipe></Recipe>
         <Nursery></Nursery>
         <section className={styles.playstore}>

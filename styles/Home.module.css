@@ -75,6 +75,7 @@
   line-height: 2rem;
   font-size: 1.5rem;
   letter-spacing: 0;
+  position: relative;
 }
 
 .accContainer a> div{
@@ -97,6 +98,24 @@
   max-height: 200px;
   width: 50%;
   height: auto;
+}
+
+.edit{
+  padding: .5rem 1rem;
+  /* width: 100%; */
+  border-radius: 600px;
+  position: absolute;
+  right: 1em;
+  top: 1em;
+  border : #ACCEB0 4px solid;
+}  
+
+.editInput input{
+  border: #939393 solid 2px;
+  padding: 5px 1rem;
+  outline: none;
+  border-radius: 600px;
+  font-size: 1rem;
 }
 
 @media only screen and (max-width: 550px){

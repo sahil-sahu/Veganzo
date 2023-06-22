@@ -2,7 +2,7 @@
     position: fixed;
     top: 0%;
     width: 100%;
-    z-index: 9999;
+    z-index: 99;
     background-color: var(--yellow);
     font-family: 'Amatic SC', cursive;
     box-shadow: 0 -30px 15px 60px var(--yellow);
@@ -192,7 +192,7 @@
 
 .proFileDropdown{
     position: absolute;
-    top: 10%;
+    top: 100%;
     right: 2%;
     font-family: 'Berlin Sans FB', Helvetica, sans-serif;
     letter-spacing: 0px;
@@ -211,6 +211,7 @@
     border-radius: 20px;
     color: #373737;
     padding: 2%;
+    z-index: 999;
     gap: 10px;
 }
 .proFileDropdown a{
@@ -227,6 +228,85 @@
 
 }
 
+.greeting p{
+    font-size: .75rem;
+    color: #505050;
+    font-family: 'Open Sans';
+}
+.signIn{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 1em unset;
+    gap: .5rem;
+}
+
+.signIn label{
+    font-size: 1rem;
+}
+
+.signIn span{
+    color: red;
+}
+.inputBox{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: 1rem;
+}
+.inputBox div{
+    display: flex;
+    align-items: flex-end;
+}
+
+.inputBox div svg{
+    width: 18px;
+    height: 24px;
+}
+.inputBox input{
+    outline: none;
+    border: #afafaf 1px solid;
+    padding: 2px 5px;
+    border-radius: 5px;
+}
+
+.counter{
+    color: #80d2be;
+    font-family: 'Open Sans';
+    font-size: .8rem;
+    text-decoration: underline;
+}
+
+.disable{
+    color: #afafaf !important;
+    text-decoration: none;
+}
+
+.OtpIp input{outline: none;}
+.inputBox input::-webkit-outer-spin-button,
+.inputBox input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.inputBox input[type=number] {
+    -moz-appearance: textfield;
+  }
+
+.submit{
+    padding: 2px;
+    width: 100%;
+    border-radius: 600px;
+    background-color: #ACCEB0;
+    margin-top: 5px;
+}  
+
+.captcha{
+
+    display: inherit;
+    visibility: hidden;
+
+}
 
 .proFileDropdown a .toggle1{
     display: block;

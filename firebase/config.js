@@ -1,7 +1,13 @@
 import { initializeApp, getApps } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getStorage } from "firebase/storage";
+import store from "../redux/store";
+import { authCheckSlice } from "../redux/fireAuth";
+import {
+    getDoc,
+    doc,
+} from 'firebase/firestore';
 
 
 const firebaseConfig = {
@@ -20,3 +26,25 @@ let firebase_app = getApps().length === 0 ? initializeApp(firebaseConfig) : getA
 export const database = getFirestore(firebase_app);
 export const auth = getAuth(firebase_app);
 export const storage = getStorage(firebase_app);
+
+onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/auth.user
+        const uid = user.uid;
+        const docref = doc(database, 'users', uid);
+        console.log('bro')
+        const docSnap = await getDoc(docref);
+        store.dispatch(authCheckSlice.actions.load({
+            auth: true,
+            name: docSnap.data().name,
+            email: docSnap.data().email,
+            phone: docSnap.data().phone,
+            id: docSnap.id,
+        }))
+      // ...
+    } else {
+      // User is signed out
+      // ...
+    }
+  });

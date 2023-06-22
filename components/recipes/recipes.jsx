@@ -23,9 +23,9 @@ export default function Recipe(){
             <div className={styles.recipeContainer}>
                 <h2 className="heading"><img src="/icons/recipe.png" alt="🥕" /><span><span>H</span>EALTHLY RECIPES</span></h2>
                 <div className={`${styles.cardContainer} grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-3`}>
-                    {item.map((e)=>{
+                    {item.map((e,i)=>{
                         return(
-                            <Card3 key={e.title} item={e} />
+                            <Card3 key={i} item={e} />
                         );
                     })}
                 </div>

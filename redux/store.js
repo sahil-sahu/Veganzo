@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
-import botCheckReducer from './botCheck';
+import authCheckReducer from './fireAuth';
 export default configureStore({
   reducer: {
-    botCheck: botCheckReducer,
+    authCheck: authCheckReducer,
   },
 })
