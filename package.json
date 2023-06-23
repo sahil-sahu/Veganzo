@@ -16,6 +16,8 @@
     "@next/font": "13.1.1",
     "@reduxjs/toolkit": "^1.9.5",
     "firebase": "^9.22.2",
+    "geofire-common": "^6.0.0",
+    "mapbox-gl": "^2.15.0",
     "next": "13.1.1",
     "next-seo": "^5.15.0",
     "react": "18.2.0",

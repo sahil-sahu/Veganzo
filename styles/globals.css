@@ -151,3 +151,44 @@
     }
   }
 
+  .mapboxgl-map{
+    height: 75vh;
+    width: 50vw;
+  }
+  
+  .markericon img{
+    height: 50px;
+    width: 50px;
+  }
+  
+  .marker {
+    background-image: url('/gauntlet.png');
+    background-size: cover;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+.liveLocation{
+    background-size: cover;
+    background-color: blueviolet;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    cursor: pointer;
+}  
+.liveLocation::after{
+    content: "I'm here";
+    width: 8rem;
+    height: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: center;
+    position: absolute;
+    transform: translate(-40%,40%);
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 500;
+}

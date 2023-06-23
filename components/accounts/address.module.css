@@ -13,6 +13,7 @@
     border-radius: 2em;
     background-color: #fff;
     border: #b1b1b1 3px solid ;
+    position: relative;
 }
 
 .addressContainer h2{
@@ -23,6 +24,28 @@
     display: inline-block;
     padding: .1rem 1rem;
     margin-bottom: 1rem;
+}
+
+.addressContainer ul{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.pushAddress{
+    font-size: 3rem;
+    color: #ACCEB0;
+    position: absolute;
+    width: 3.5rem;
+    height: 3.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 2rem;
+    left: 90%;
+    border-radius: 100%;
+    border: #ACCEB0 solid 3px;
+    cursor: pointer;
 }
 
 .location{
@@ -40,8 +63,8 @@
 
 .editBox{
     position: absolute;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 500%;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
@@ -58,9 +81,13 @@
     padding: 2rem;
     display: flex;
     flex-direction: column;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
     gap: 1rem;
     min-width: 50%;
-    position: relative;
+    position: absolute;
+    z-index: 100;
 }
 
 .editContainer input, .editContainer textarea{
@@ -70,7 +97,7 @@
     border-radius: 10px;
 }
 
-.editContainer button{
+.addSubm{
     background-color: #ACCEB0;
     color: #fff;
     font-size: 1.2rem;
@@ -80,5 +107,33 @@
     bottom: 5%;
     width: 10rem;
     border-radius: 600px;
+    text-align: center;
+}
 
+.mapSearch{
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 999;
+    background-color: #fff;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.relocate{
+    position: absolute;
+    top: 80%;
+    left: calc(100% - 2rem);
+    width: 29px;
+    height: 29px;
+    z-index: 999;
+    cursor: pointer;
+    background: url('/icons/liveloco.png') #fff;
+    background-position: 29px 0;
+    background-size: 1000%;
+    border-radius: 100%;
+}
+
+.mapSearch input{
+    padding: 5px .5rem;
 }
