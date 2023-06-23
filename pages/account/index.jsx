@@ -9,11 +9,11 @@ import Recipe from "../../components/recipes/recipes";
 import Nursery from "../../components/nursery/nursery";
 import { useSelector, useDispatch } from "react-redux";
 import { Input } from "@material-tailwind/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { doc, updateDoc } from "firebase/firestore";
 import { database } from "../../firebase/config";
 import { load } from "../../redux/fireAuth";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 
 export default function Home() {
   const { auth, name, email, phone, id } = useSelector(state => state.authCheck);
@@ -21,6 +21,11 @@ export default function Home() {
   const [edit, setEdit] = useState(false);
   const [Ename,setEname] = useState(name);
   const [Email,setEmail] = useState(email);
+  const router = useRouter();
+  useEffect(() => {
+    if(!auth)
+      router.push('/');
+  },[])
 
   const handleEdit = async () =>{
     if (edit) {
@@ -132,22 +137,3 @@ export default function Home() {
     </>
   )
 }
-
-import store from "../../redux/store";
-import { authCheckSlice } from "../../redux/fireAuth";
-
-export async function getServerSideProps(context) {
-  // Get user id
-  let auth = store.getState().authCheck.auth;
-  if (!auth) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
-    }
-  }
-  return {
-    props: {auth}, // will be passed to the page component as props
-  }
-} 
