@@ -34,18 +34,19 @@
 
 .pushAddress{
     font-size: 3rem;
+    line-height: 2.8rem;
     color: #ACCEB0;
     position: absolute;
     width: 3.5rem;
     height: 3.5rem;
     display: flex;
     justify-content: center;
-    align-items: center;
     top: 2rem;
     left: 90%;
     border-radius: 100%;
     border: #ACCEB0 solid 3px;
     cursor: pointer;
+    content: "+";
 }
 
 .location{
@@ -62,9 +63,9 @@
 }
 
 .editBox{
-    position: absolute;
+    position: fixed;
     width: 100vw;
-    height: 500%;
+    height: 100vh;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
@@ -77,16 +78,18 @@
 
 .editContainer{
     background-color: #fff;
+    max-height: 80vh;
+    overflow-y: auto;
     border-radius: 25px;
     padding: 2rem;
     display: flex;
     flex-direction: column;
-    top: 25%;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
     gap: 1rem;
     min-width: 50%;
-    position: absolute;
+    position: fixed;
     z-index: 100;
 }
 

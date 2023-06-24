@@ -35,6 +35,13 @@
     padding: .5rem;
 }
 
+.item p{
+    width: 12rem;
+    white-space: nowrap; 
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
 .cartNum{
     display: flex;
     justify-content: space-evenly;

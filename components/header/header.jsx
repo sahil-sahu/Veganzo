@@ -33,6 +33,7 @@ export default function Header(props){
     const [otp, setOtp] = useState([false,``]);
     const router = useRouter();
     const login = useSelector(state => state.authCheck);
+    const cartCount = useSelector(state => state.cart.cart.length);
     const dispatch = useDispatch();
     const [counter, setCounter] = useState();
     const [status, setStatus] = useState(STATUS.STOPPED)
@@ -306,7 +307,7 @@ export default function Header(props){
                 </div>
                 <div className={styles.navactions}>
                     <ul>
-                        <li><Link href="/checkout"><Image width={25} height={25} src={"/header/cart.svg"} alt="❤️"></Image><span>CART</span></Link></li>
+                        <li><Link className={styles.cart} href="/checkout"><Image width={25} height={25} src={"/header/cart.svg"} alt="❤️" /><span>CART</span>{cartCount>0 && <span className={styles.cartCounter}>{cartCount}</span>}</Link></li>
                         <li onClick={()=> setProfile(true)}  className={styles.profile}><Image width={25} height={25} src={"/header/profile.svg"} alt="❤️"></Image><span>{login.auth?`PROFILE`: `SIGN IN`}</span></li>
                     </ul>
                 </div>

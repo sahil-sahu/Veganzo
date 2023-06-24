@@ -17,27 +17,6 @@ import ItemCard from "../../components/card";
 import { useEffect, useState } from "react"
 import { typesense } from "../../typesense/config"
 
-const item = [
-  {
-      name:"Kashmiri Apple",
-      price:"120",
-      unit:"kg",
-      img:"/dummy/apples.png"
-  },
-  {
-      name:"Avacado",
-      price:"150",
-      unit:"kg",
-      img:"/dummy/avacado.png"
-  },
-  {
-      name:"Kiwi",
-      price:"200",
-      unit:"kg",
-      img:"/dummy/kiwi.png"
-  },
-]
-
 export default function Search({mainData, q}) {
     const router = useRouter();
     const [results, setResult] = useState(mainData);
@@ -51,7 +30,7 @@ export default function Search({mainData, q}) {
           'query_by'  : 'name, type',
         });
         setResult(data.hits.map((e)=>{
-          return { id : e.document.id, name: e.document.name, img:e.document.cover, price:"120", unit:"kg", }
+          return { id : e.document.id, name: e.document.name, img:e.document.cover, price:"120", unit:"kg", catgory: JSON.stringify(e.document.catgory), }
         }));
         setSearch(query);
       }())
@@ -68,6 +47,7 @@ export default function Search({mainData, q}) {
         <section className={srchstyles.searchResults}>
         <div className={`${srchstyles.cardContainer} grid grid-cols-2 gap-2 md:grid-cols-3`}>
                     {results.map((e,i)=>{
+                        e.category = JSON.parse(e.catgory)
                         return(
                             <ItemCard key={i} item={e} />
                         );
@@ -131,7 +111,8 @@ export async function getServerSideProps(context) {
   return {
     props: {
       mainData: data.hits.map((e)=>{
-        return { id : e.document.id, name: e.document.name, img:e.document.cover, price:"120", unit:"kg", }
+        // console.log(e.catory);
+        return { id : e.document.id, name: e.document.name, img:e.document.cover, price:"120", unit:"kg", catgory: JSON.stringify(e.document.catgory),}
       }),
       q: query,
     },

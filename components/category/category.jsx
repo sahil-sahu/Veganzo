@@ -12,19 +12,22 @@ export default function Category(){
             name:"Kashmiri Apple",
             price:"120",
             unit:"kg",
-            img:"/dummy/apples.png"
+            img:"/dummy/apples.png",
+            category : [],
         },
         {
             name:"Avacado",
             price:"150",
             unit:"kg",
-            img:"/dummy/avacado.png"
+            img:"/dummy/avacado.png",
+            category : [],
         },
         {
             name:"Kiwi",
             price:"200",
             unit:"kg",
-            img:"/dummy/kiwi.png"
+            img:"/dummy/kiwi.png",
+            category : [],
         },
     ]
 

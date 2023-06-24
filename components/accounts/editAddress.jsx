@@ -68,16 +68,10 @@ export default function EditAddress(props){
     }
 
     useEffect(() => {
-        if (lng == null && !pickup) {
+        if (lng == null) {
           getLocation();
           return;
-        } else if (pickup){
-          setLat(pickup[1]);
-          setLng(pickup[0]);
-          setPickup(null);
-          return;
         }
-        setPickup([lng, lat]);
         map.current = new mapboxgl.Map({
           container: "map", // container ID
           style: "mapbox://styles/mapbox/streets-v9", // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
@@ -101,6 +95,12 @@ export default function EditAddress(props){
         marker.current = new mapboxgl.Marker({ draggable: true })
           .setLngLat([lng, lat])
           .addTo(map.current);
+        if (pickup){
+          let plng = pickup[0];
+          let plat = pickup[1];
+          setPosition(plat, plng);
+          setPickup(null);
+        }  
         function onDragEnd() {
           // alert(e);
           const lngLat = marker.current.getLngLat();

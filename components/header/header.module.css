@@ -186,6 +186,26 @@
     flex: 1;
 }
 
+.cart{
+    position: relative;
+}
+
+.cartCounter{
+    background-color: red;
+    border-radius: 600px;
+    font-family: 'OPen Sans', sans-serif;
+    font-size: .65rem;
+    width: 1rem;
+    text-align: center;
+    height: 1rem;
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
 .profile{
     cursor: pointer;
 }
@@ -458,7 +478,7 @@
         position: absolute;
         width: 100%;
         height: 2rem;
-        top: calc(100vh - 2rem);
+        bottom: (100vh - 2rem);
         left: 50%;
         transform-origin: center 100%;
         transform: translate(-50%,0vh);

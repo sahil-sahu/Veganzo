@@ -5,8 +5,14 @@ import { NextSeo } from 'next-seo';
 import { Select, Option } from "@material-tailwind/react";
 import Header from '../../components/header/header';
 import styles from '../../components/cart/cart.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { decrement } from '../../redux/cart';
 
 export default function Home() {
+
+  const cart = useSelector(state => state.cart.cart);
+  const dispatch = useDispatch();
+
   return (
     <>
       <NextSeo
@@ -22,26 +28,21 @@ export default function Home() {
                       my cart
                   </h3>
                   <ul>
-                    {[0,1,2,3].map(e => {
-                      return (<li>
+                    {cart.map((e,i) => {
+                      return (<li key={e.id}>
                         <div className={styles.radio}></div>
                         <div className={styles.item}>
-                          <p>{`Apple`}</p>
-                          <select data-te-select-init>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                            <option value="4">Four</option>
-                            <option value="5">Five</option>
-                            <option value="6">Six</option>
-                            <option value="7">Seven</option>
-                            <option value="8">Eight</option>
-                          </select>
+                          <p>{e.name}</p>
+                          <p>{e.category.name}</p>
                         </div>
                         <div className={styles.cartNum}>
-                          <span style={{color: '#ACCEB0',}}>{"+"}</span>
-                          <span>{1}</span>
-                          <span style={{color: '#ACCEB0',}}>{"-"}</span>
+                          <span onClick={(e)=>{
+                            dispatch(decrement({index:i,quantity:-1}));
+                          }} style={{color: '#ACCEB0',}}>{"-"}</span>
+                          <span>{e.quantity}</span>
+                          <span onClick={(e)=>{
+                            dispatch(decrement({index:i,quantity:1}));
+                          }} style={{color: '#ACCEB0',}}>{"+"}</span>
                         </div>
                         <div className={styles.itemTotal}>
                           ₹640

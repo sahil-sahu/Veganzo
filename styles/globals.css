@@ -151,24 +151,24 @@
     }
   }
 
-  .mapboxgl-map{
-    height: 75vh;
-    width: 50vw;
-  }
-  
-  .markericon img{
-    height: 50px;
-    width: 50px;
-  }
-  
-  .marker {
-    background-image: url('/gauntlet.png');
-    background-size: cover;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    cursor: pointer;
-  }
+.mapboxgl-map{
+  height: 75vh;
+  width: 50vw;
+}
+
+.markericon img{
+  height: 50px;
+  width: 50px;
+}
+
+.marker {
+  background-image: url('/gauntlet.png');
+  background-size: cover;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  cursor: pointer;
+}
 
 .liveLocation{
     background-size: cover;
