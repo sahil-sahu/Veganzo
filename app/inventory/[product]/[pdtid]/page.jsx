@@ -70,11 +70,13 @@ const Add = ({ params }) => {
           name: e.name,
         }})],
       });
-      await typesense.collections('inventory').documents(docID).update({
+      await typesense.collections('inventory').documents().upsert({
+        id: docID,
         name,
         descrip,
         type: type,
         cover: arr.length>0? arr[0].url:"",
+        catgory:rows,
       })
       setFiles(arr);
       setLoading(false);

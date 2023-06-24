@@ -124,15 +124,20 @@ const Product = ({ params }) => {
       (async function(){
         let snapshot;
         const ref = collection(database,`inventory/${type}/stack`);
-        const q = querystr != ""? query(ref, where("name", "array-contains", querystr) ): null;
-        let data = await typesense.collections('inventory').documents().search({
+        // const q = querystr != ""? query(ref, where("name", "array-contains", querystr) ): null;
+        if(querystr == ""){
+          snapshot = await getDocs( collection(database,`inventory/${type}/stack`));
+          setPdt(snapshot.docs.map(doc => ({name : doc.data().name, id: doc.id })));
+
+        } else {let data = await typesense.collections('inventory').documents().search({
           'q'         : querystr,
           'query_by'  : 'name',
           'filter_by' : `type:=${type}`,
         })
         setPdt([...data.hits.map((e)=>{
           return { id : e.document.id, name: e.document.name }
-        })])  
+        })])
+      }
 
       }())
     }, [querystr, refresher])
