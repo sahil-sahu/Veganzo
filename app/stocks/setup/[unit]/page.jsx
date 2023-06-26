@@ -36,6 +36,7 @@ import Appbar from '../appbar';
 // firebase things
 import { database } from '../../../../firebase/config';
 import { collection, addDoc, getDocs, setDoc, doc, query, where } from "firebase/firestore"; 
+import MapInput from './mapInput';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -73,13 +74,18 @@ const rows = [
 
 function Stores({params}) {
   const [open, setOpen] = React.useState(false);
+
+  // store creating stuff
+  const [pickup, setPickup] = React.useState();
   const [unit, setUnit] = React.useState('');
+
+  // displaying stuff
   const [stores, setStores] = React.useState([]);
   const [dispStores, setDispStores] = React.useState([]);
   const [querystr, setQuery] = React.useState('');
   const theme = useTheme();
   const router = useRouter();
-  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+  const fullScreen = useMediaQuery(theme.breakpoints.down('lg'));
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -90,7 +96,7 @@ function Stores({params}) {
   };
 
   const createObj = async ()=>{
-    const docRef = await addDoc(collection(database, `store`),{name:unit, type:params.unit,});
+    const docRef = await addDoc(collection(database, `store`),{name:unit, type:params.unit, lng: pickup[0], lat: pickup[1],});
     addDoc(collection(database,`store/${docRef.id}/logs`), {'type':'genesis'});
     const inventory = await getDocs(collection(database, `inventory`));
     inventory.forEach(async type =>{
@@ -178,11 +184,11 @@ function Stores({params}) {
           aria-labelledby="responsive-dialog-title"
         >
           <DialogTitle id="responsive-dialog-title">
-            {"Confirm creating new product?"}
+            {"Confirm creating new store?"}
           </DialogTitle>
           <DialogContent>
             <DialogContentText>
-              This will create product in both databases
+              Make a new {params.unit} unit
               <Box sx={{
                   '& .MuiTextField-root': { m: 2 },
                 }}>
@@ -194,6 +200,8 @@ function Stores({params}) {
                   value={unit}
                   onChange={(e)=>{setUnit(e.target.value)}}
                 />
+                <br />
+                <MapInput settingMap={setPickup} />
               </Box>
             </DialogContentText>
           </DialogContent>

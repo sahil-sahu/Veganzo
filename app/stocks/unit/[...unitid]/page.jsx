@@ -43,6 +43,7 @@ import { Container } from '@mui/material';
 const columns = [
   { id: 'name', label: 'Name', minWidth: 170 },
   { id: 'stock', label: 'Stock', minWidth: 100 },
+  { id: 'price', label: 'Price per 1kg', minWidth: 100 },
 ];
 
 function Store({params}){
@@ -77,7 +78,8 @@ function Store({params}){
                             name = inventory.vegetables[ele.id].name
                           }
                           let stock = ele.data().quantity;
-                          return {name, stock, ref: `store/${store.id}/vegetables/${ele.id}`}
+                          let price = ele.data().price;
+                          return {name, stock, price,ref: `store/${store.id}/vegetables/${ele.id}`,}
                         }
                         )
           ]
@@ -95,7 +97,8 @@ function Store({params}){
                             name = inventory.fruits[ele.id].name
                           }
                           let stock = ele.data().quantity;
-                          return {name, stock, ref: `store/${store.id}/fruits/${ele.id}`}
+                          let price = ele.data().price;
+                          return {name, stock, price,ref: `store/${store.id}/fruits/${ele.id}`}
                         }
                         )
           ]
@@ -113,7 +116,8 @@ function Store({params}){
                             name = inventory.beverages[ele.id].name
                           }
                           let stock = ele.data().quantity;
-                          return {name, stock, ref: `store/${store.id}/beverages/${ele.id}`}
+                          let price = ele.data().price;
+                          return {name, stock, price,ref: `store/${store.id}/beverages/${ele.id}`}
                         }
                         )
           ]
@@ -208,21 +212,24 @@ const Excel = (props)=>{
 const TableItem = (props) =>{
 
   const theme = useTheme();
-  const [unit, setUnit] = React.useState(0)
+  const [unit, setUnit] = React.useState(0);
   const [open, setOpen] = React.useState(false);
   const [toggle, setToggle] = React.useState(false);
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
   const pdt = props.data;
+  const [price, setPrice] = React.useState(pdt.price);
   const stockUpdate = async () => {
     let items = pdt.ref.split("/");
     await updateDoc(doc(database, pdt.ref), {
       quantity: Number(pdt.stock)+Number(unit),
+      price: Number(price),
     });
     console.log(items[0], items[1]);
     await addDoc(collection(database, items[0], items[1], 'logs'),{
       timeStamp: Date.now(),
       objRef:pdt.ref,
       objName: pdt.name,
+      currentPrice: price,
       from: pdt.stock,
       to: Number(pdt.stock)+Number(unit)
     });
@@ -269,6 +276,19 @@ const TableItem = (props) =>{
                 onChange={(e)=>{setUnit(e.target.value)}}
               />
             </Box>
+            <Box sx={{
+                '& .MuiTextField-root': { m: 2 },
+              }}>
+              <TextField
+                required
+                id="outlined-required"
+                label="Price per kg/ltr"
+                type='number'
+                placeholder='45'
+                value={price}
+                onChange={(e)=>{setPrice(e.target.value)}}
+              />
+            </Box>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -300,6 +320,9 @@ const TableItem = (props) =>{
           horizontal: 'right',
         }}
       />  
+      </TableCell>
+      <TableCell align={'left'}>
+        {pdt.price}
       </TableCell>
     </>
   );
