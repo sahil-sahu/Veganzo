@@ -32,16 +32,20 @@ onAuthStateChanged(auth, async (user) => {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/auth.user
         const uid = user.uid;
-        const docref = doc(database, 'users', uid);
-        console.log('bro')
-        const docSnap = await getDoc(docref);
-        store.dispatch(authCheckSlice.actions.load({
-            auth: true,
-            name: docSnap.data().name,
-            email: docSnap.data().email,
-            phone: docSnap.data().phone,
-            id: docSnap.id,
-        }))
+        try {
+          const docref = doc(database, 'users', uid);
+          console.log('bro')
+          const docSnap = await getDoc(docref);
+          store.dispatch(authCheckSlice.actions.load({
+              auth: true,
+              name: docSnap.data().name,
+              email: docSnap.data().email,
+              phone: docSnap.data().phone,
+              id: docSnap.id,
+          }))
+        } catch (error) {
+          
+        }
       // ...
     } else {
       // User is signed out

@@ -12,7 +12,7 @@ let persistor = persistStore(store);
 export default function App({ Component, pageProps }) {
 
   useEffect(()=>{
-    if (!store.getState().locationDB.vegetables && store.getState().cart.location.set) {
+    if (!store.getState().locationDB.vegetables && (store.getState().cart?.location.set ?? null)) {
       callLocoDB(store.getState().cart.location.lng, store.getState().cart.location.lat);
     }
   },[])

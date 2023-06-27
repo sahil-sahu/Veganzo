@@ -27,16 +27,19 @@ function toRadians(degrees) {
 
 //Providing the nearest store based on the category
 const nearest = (snap, lng, lat) => {
-  let store = {id:snap.docs[0].id , dist: calculateDistance(lat, lng, Number(snap.docs[0].data()).lat, Number(snap.docs[0].data().lng))};
+  let store = {id:snap.docs[0].id , dist: calculateDistance(lat, lng, Number(snap.docs[0].data().lat), Number(snap.docs[0].data().lng))};
   for (let index = 1; index < snap.docs.length; index++) {
     const ele = array[index];
-    let dist = calculateDistance(lat, lng, Number(ele.data()).lat, Number(ele.data().lng));
+    let dist = calculateDistance(lat, lng, Number(ele.data().lat), Number(ele.data().lng));
     console.log(dist);
     if( dist < store.dist )
       store = {id: ele.id , dist};
     
   }
-  return store.id;
+  if (store.dist > 7) {
+    return null;
+  }
+  return store;
 }
 //providing the final store data for respective category
 const inventoryFetch = async (type, lng , lat) =>{
@@ -50,9 +53,18 @@ const inventoryFetch = async (type, lng , lat) =>{
     console.log(stores.docs.length);
     if(stores.docs.length > 0) {
       let store = nearest(stores , lng, lat);
-      let data = await getDocs(collection(db ,`store/${store}/${type}`));
+      if (!store) {
+        resolve({});
+        return;
+      }
+      let json = {
+        "storeinfo": {
+          "name" : store.id,
+          "dist" : store.dist,
+        }
+      };
+      let data = await getDocs(collection(db ,`store/${store.id}/${type}`));
       console.log(`fetching maindata for store ${type}`);
-      let json = {};
       data.forEach(doc => {
         json[doc.id] = {
           stock : doc.data().quantity > 0,
@@ -60,6 +72,8 @@ const inventoryFetch = async (type, lng , lat) =>{
         }
       });
       resolve(json);
+    } else {
+      resolve({});
     };
   });
 };
