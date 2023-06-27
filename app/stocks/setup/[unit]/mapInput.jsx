@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import mapboxgl from "mapbox-gl"; 
+import 'mapbox-gl/src/css/mapbox-gl.css'
 import styles from "./mapInput.module.css";
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX;
@@ -77,7 +78,7 @@ function MapInput(props) {
                         <ul>
                             {
                                 Lresults.map((result,i) => (
-                                    <li key={i}  onClick={()=>{
+                                    <li key={i} cursor="pointer" onClick={()=>{
                                         setPosition(result.center[1],result.center[0])
                                     }} >{result.place_name}</li>
                                 ))

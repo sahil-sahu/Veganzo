@@ -78,10 +78,10 @@ const MultiFile = (props) => {
   )
 }
 // data={fileData} func={setFiles} handleDel={handleDel}
-MultiFile.defaultProps = {
-  data: [],
-  func : function(){},
-  handleDel : function(){},
-}  
+// MultiFile.defaultProps = {
+//   data: [],
+//   func : function(){},
+//   handleDel : function(){},
+// }  
 
 export default MultiFile;
