@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import authCheckReducer from './fireAuth';
 import cartReducer from './cart';
+import locationDBReducer from './locationDB';
 
 //Persistent store
 import storage from 'redux-persist/lib/storage';
@@ -11,12 +12,13 @@ import thunk from 'redux-thunk';
 const reducers = combineReducers({
   authCheck: authCheckReducer,
   cart: cartReducer,
+  locationDB: locationDBReducer,
 });
 
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['authCheck'],
+  blacklist: ['authCheck', 'locationDB'],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);

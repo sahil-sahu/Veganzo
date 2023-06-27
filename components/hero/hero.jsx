@@ -29,8 +29,6 @@ export default function Hero(){
             spaceBetween={50}
             slidesPerView={1}
             modules={[Pagination]}
-            onSlideChange={() => console.log('slide change')}
-            onSwiper={(swiper) => console.log(swiper)}
             pagination={{ clickable: true }}
             className={styles.carousel}
             >

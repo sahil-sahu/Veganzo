@@ -30,7 +30,7 @@ export default function Search({mainData, q}) {
           'query_by'  : 'name, type',
         });
         setResult(data.hits.map((e)=>{
-          return { id : e.document.id, name: e.document.name, img:e.document.cover, price:"120", unit:"kg", catgory: JSON.stringify(e.document.catgory), }
+          return { id : e.document.id, name: e.document.name, img:e.document.cover, price:"120", unit:"kg", type: e.document.type, catgory: JSON.stringify(e.document.catgory), }
         }));
         setSearch(query);
       }())
@@ -112,7 +112,7 @@ export async function getServerSideProps(context) {
     props: {
       mainData: data.hits.map((e)=>{
         // console.log(e.catory);
-        return { id : e.document.id, name: e.document.name, img:e.document.cover, price:"120", unit:"kg", catgory: JSON.stringify(e.document.catgory),}
+        return { id : e.document.id, name: e.document.name, img:e.document.cover, price:"120", unit:"kg", type: e.document.type, catgory: JSON.stringify(e.document.catgory),}
       }),
       q: query,
     },

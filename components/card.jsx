@@ -1,6 +1,6 @@
 import styles from "./category/cat.module.css"
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { add } from "../redux/cart";
 
 //tailwind stuff
@@ -11,6 +11,9 @@ export default function ItemCard(props){
     const [count, setCount] = useState(1);
     const e = props.item;
     const [ratio, setRatio] = useState(!!e.category.length? e.category[0]: {ratio:1});
+    let stock = '...loading';
+
+    
 
     const dispatch = useDispatch();
     const addToCart = () => {
@@ -23,7 +26,18 @@ export default function ItemCard(props){
         setCount(1);
     }
 
-    console.log(ratio.ratio);
+    const type = e.type? e.type: 'dummy';
+
+    let price = e.price;
+    if (type !== 'dummy') {
+        let item = useSelector(state => state.locationDB[type]?.[e.id] ?? null);
+        if (item) {
+            price = Number(item.price);
+            stock = item.stock? item.stock: "Out of stock";
+        }
+    }
+
+    // const localData = useSelector(state => state.locationDB)
 
     return(
         <div className={styles.itemCard}>
@@ -31,7 +45,7 @@ export default function ItemCard(props){
             <h4>{e.name}</h4>
             <div className={styles.grid}>
                 <div>
-                    <p>Rs.{+(e.price*+ratio.ratio).toFixed(2)}</p>
+                    <p>Rs.{+(price*+ratio.ratio).toFixed(2)}</p>
                     <div className={styles.options}>
                         <select onChange={(k)=>{ setRatio(e.category[k.target.value])}}>
                             {
@@ -56,7 +70,7 @@ export default function ItemCard(props){
                             />
                     </div>
                 </div>
-                <div onClick={addToCart} className={styles.add2Cart}><span>ADD</span><img src="/icons/cart.png" alt="" /></div>
+                {stock===true? <div onClick={addToCart} className={styles.add2Cart}><span>ADD</span><img src="/icons/cart.png" alt="" /></div>: stock}
             </div>
         </div>
     );

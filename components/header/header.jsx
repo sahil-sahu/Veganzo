@@ -17,6 +17,7 @@ import {
     doc,
     setDoc,
 } from 'firebase/firestore';
+import PickBox from "./PickBox";
 const STATUS = {
     STARTED: 'Started',
     STOPPED: 'Stopped',
@@ -26,6 +27,7 @@ export default function Header(props){
     const [interimTranscript, setInterimTranscript] = useState('');
     const [navbarOpen, setNavbarOpen] = useState(false);
     const [suggestion, setSuggestion] = useState(false);
+    const [pickBox, setPickBox] = useState(false);
     const [animate, setAnimate] = useState('');
     const [search, setSearch] = useState(props.q? props.q: '');
     const [profile, setProfile] = useState(false);
@@ -36,7 +38,10 @@ export default function Header(props){
     const cartCount = useSelector(state => state.cart.cart.length);
     const dispatch = useDispatch();
     const [counter, setCounter] = useState();
-    const [status, setStatus] = useState(STATUS.STOPPED)
+    const [status, setStatus] = useState(STATUS.STOPPED);
+
+    const pickup = useSelector(state => state.cart.location.name)
+
     let style = null;
 
     if (navbarOpen){
@@ -309,6 +314,7 @@ export default function Header(props){
                     <ul>
                         <li><Link className={styles.cart} href="/checkout"><Image width={25} height={25} src={"/header/cart.svg"} alt="❤️" /><span>CART</span>{cartCount>0 && <span className={styles.cartCounter}>{cartCount}</span>}</Link></li>
                         <li onClick={()=> setProfile(true)}  className={styles.profile}><Image width={25} height={25} src={"/header/profile.svg"} alt="❤️"></Image><span>{login.auth?`PROFILE`: `SIGN IN`}</span></li>
+                        <li onClick={()=> setPickBox(true)}  className={styles.location}><Image width={25} height={25} src={"/header/blackLocation.png"} alt="📍"></Image><span>{pickup}</span></li>
                     </ul>
                 </div>
                 <div className={styles.toggle} onClick={()=>{
@@ -420,6 +426,7 @@ export default function Header(props){
                 </div>
             </>    
             }
+            {pickBox && <PickBox open={setPickBox} /> }
         <div id={styles.captcha} className={styles.captcha}></div>       
         </header>
     )

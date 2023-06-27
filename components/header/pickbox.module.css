@@ -1,0 +1,70 @@
+.pickBox{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: rgba(0, 0, 0, .2);
+    z-index: 99;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pickContainer{
+    background-color: #fff;
+    max-height: 80vh;
+    overflow-y: auto;
+    border-radius: 25px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    gap: 1rem;
+    min-width: 50%;
+    position: fixed;
+    z-index: 100;
+}
+
+.pickContainer h3{
+
+    font-size: 3rem;
+    font-weight: 800;
+
+}
+
+.mapContainer{
+    height: 15rem;
+}
+
+.mapSearch{
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 999;
+    background-color: #fff;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.relocate{
+    position: absolute;
+    top: 80%;
+    left: calc(100% - 2rem);
+    width: 29px;
+    height: 29px;
+    z-index: 999;
+    cursor: pointer;
+    background: url('/icons/liveloco.png') #fff;
+    background-position: 29px 0;
+    border: none;
+    background-size: 1000%;
+    border-radius: 100%;
+}
+
+.mapSearch input{
+    padding: 5px .5rem;
+}

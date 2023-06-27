@@ -99,7 +99,7 @@ export default function EditAddress(props){
           let plng = pickup[0];
           let plat = pickup[1];
           setPosition(plat, plng);
-          setPickup(null);
+          setPickup([lng, lat]);
         }  
         function onDragEnd() {
           // alert(e);
