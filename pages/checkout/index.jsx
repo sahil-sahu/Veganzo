@@ -7,6 +7,7 @@ import { Select, Option } from "@material-tailwind/react";
 import Header from '../../components/header/header';
 import styles from '../../components/cart/cart.module.css';
 import EditAddress from '../../components/accounts/editAddress';
+import fetchAddress from '../../components/accounts/helper';
 import { useDispatch, useSelector } from 'react-redux';
 import { decrement } from '../../redux/cart';
 import { useEffect, useRef, useState } from 'react';

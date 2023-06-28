@@ -7,6 +7,7 @@ import fetchAddress from "../accounts/helper";
 import mapboxgl from "mapbox-gl"; 
 import { addLocation } from "../../redux/cart";
 import { Button } from "@material-tailwind/react";
+import 'mapbox-gl/src/css/mapbox-gl.css';
 
 function PickBox(props){
 
