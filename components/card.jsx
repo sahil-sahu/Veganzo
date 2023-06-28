@@ -22,6 +22,7 @@ export default function ItemCard(props){
             quantity: count,
             name: e.name,
             category: ratio,
+            type,
         }));
         setCount(1);
     }
