@@ -1,9 +1,6 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import Link from "next/link";
+import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
-import { Radio, Typography, Collapse, } from "@material-tailwind/react";
-import { Select, Option } from "@material-tailwind/react";
+import { Radio, Typography, Button } from "@material-tailwind/react";
 import Header from '../../components/header/header';
 import styles from '../../components/cart/cart.module.css';
 import EditAddress from '../../components/accounts/editAddress';
@@ -17,22 +14,52 @@ export default function Home() {
   const cart = useSelector(state => state.cart.cart);
   const storeDB = useSelector(state => state.locationDB);
   const addresses = useSelector(state => state.authCheck.address);
-  const auth = useSelector(state => state.authCheck.auth);
+  const {auth, id} = useSelector(state => state.authCheck);
   const dispatch = useDispatch();
   const [total, setTotal] = useState('');
   const [open, setAdd] = useState(0);
   const [add ,setAddress] = useState(false);
-  const paymentLoad = useRef({})
+  const paymentLoad = useRef({payment: "upi"})
+  const router = useRouter();
 
-  useEffect(()=>{
-    setTotal(cart.reduce((acc, e) => acc + e.quantity*e.category.ratio*storeDB[e.type]?.[e.id]?.price ?? 0, 0))
-  },[cart])
+  const placeOrder = async () =>{
+    const payload ={
+      userID: id,
+      cart: cart,
+      paymentMode: paymentLoad.current.payment,
+      address: paymentLoad.current.address,
+      stores: [storeDB.vegetables.storeinfo.name, storeDB.fruits.storeinfo.name, storeDB.beverages.storeinfo.name],
+      storeids: {
+        vegetables: storeDB.vegetables.storeinfo.name,
+        fruits: storeDB.fruits.storeinfo.name,
+        beverages: storeDB.beverages.storeinfo.name
+      },
+    }
+    if(paymentLoad.current.address && paymentLoad.current.address && cart.length > 0){
+      let response = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+      if(response.status === 200){
+        let resp = await response.json();
+        // console.log(resp.paymentlink);
+        router.push(resp.paymentlink);
+
+      } else{
+        console.log("Chud gaya");
+      }
+    }
+  }
 
   useEffect(()=>{
     if(addresses.length == 0 && auth){
       fetchAddress();
     }
-  },[auth]);
+    setTotal(cart.reduce((acc, e) => acc + e.quantity*e.category.ratio*storeDB[e.type]?.[e.id]?.price ?? 0, 0))
+  },[auth, cart]);
 
   return (
     <>
@@ -106,7 +133,7 @@ export default function Home() {
                           Select delivery address
                         </h4>
                         {open === 0 && <>
-                        <form onSubmit>
+                        <form>
                         {
                         addresses.map((ele, i) => {
                                   return(
@@ -114,7 +141,7 @@ export default function Home() {
                                           key={ele.id}
                                           name={`description`}
                                           id={`address${ele.id}`}
-                                          onChange={()=>{ paymentLoad.current.address = ele; setAdd(1);}}
+                                          onChange={()=>{ paymentLoad.current.address = ele; setTimeout(()=> setAdd(1), 1000);}}
                                           label={
                                           <div>
                                               <Typography color="teal" className="font-medium">{ele.name}</Typography>
@@ -185,7 +212,9 @@ export default function Home() {
                         </h4>
                         {open === 2 && <>
                           
-                          //Content goes here
+                          <Button onClick={placeOrder} variant="outlined" className="rounded-full">
+                            Place Order
+                          </Button>
                         
                         </>}
                       </div>
