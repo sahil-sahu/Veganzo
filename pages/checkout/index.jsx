@@ -14,7 +14,7 @@ export default function Home() {
   const cart = useSelector(state => state.cart.cart);
   const storeDB = useSelector(state => state.locationDB);
   const addresses = useSelector(state => state.authCheck.address);
-  const {auth, id} = useSelector(state => state.authCheck);
+  const {auth, id, phone} = useSelector(state => state.authCheck);
   const dispatch = useDispatch();
   const [total, setTotal] = useState('');
   const [open, setAdd] = useState(0);
@@ -25,6 +25,7 @@ export default function Home() {
   const placeOrder = async () =>{
     const payload ={
       userID: id,
+      userPhone: phone,
       cart: cart,
       paymentMode: paymentLoad.current.payment,
       address: paymentLoad.current.address,

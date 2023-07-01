@@ -1,6 +1,6 @@
 import { addDoc, collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import { db } from "./../../firebase/admin-config";
-import schema from "./formValidator";
+// import schema from "./formValidator";
 const sdk = require('api')('@cashfreedocs-new/v3#173cym2vlivg07d0');
 
 export default async function handler(req, res) {
@@ -11,9 +11,12 @@ export default async function handler(req, res) {
       try {
           let order_res = await sdk.createPaymentLink({
             customer_details: {
-                customer_phone: json.address.phone,
+                customer_phone: json.userPhone,
                 customer_name: json.address.name
                     },
+            link_meta: {
+              return_url: 'http://localhost:3000/'
+            },                    
             link_notify: {send_sms: false, send_email: false},
             link_notes: {newKey: 'New Value'},
             link_id: order.id,
@@ -28,6 +31,7 @@ export default async function handler(req, res) {
             'x-client-secret': process.env.CASHSECRET,
             'x-api-version': '2022-09-01'
             })
+            console.log(order_res);
             return res.status(200).json({ paymentlink: order_res.data.link_url });    
         
       }
@@ -65,6 +69,7 @@ function addOrdertoDB(json){
         //done with totaling cart cost
         let order = await addDoc(collection(db, "orders"), {
             userID: json.userID,
+            phone: json.userPhone,
             address: json.address,
             timestamp: new Date().getTime(),
             total: total,
