@@ -11,12 +11,23 @@ export default function handler(req, res) {
   };
   if(paymentResp.status === 'SUCCESS' && paymentResp.orderid){
     // check
-    sdk.getPaymentLinkOrders({
-      link_id: paymentResp.orderid,
+    // sdk.getPaymentLinkOrders({
+    //   link_id: paymentResp.orderid,
+    //   'x-client-id': process.env.CASHID,
+    //   'x-client-secret': process.env.CASHSECRET,
+    //   'x-api-version': '2022-09-01'
+    // })
+    const url = `https://sandbox.cashfree.com/pg/links/${paymentResp.orderid}/orders`;
+    const headers = {
+      'accept': 'application/json',
+      'x-api-version': '2022-09-01',
       'x-client-id': process.env.CASHID,
       'x-client-secret': process.env.CASHSECRET,
       'x-api-version': '2022-09-01'
-    })
+    };
+
+// Make the GET request using Axios
+    axios.get(url, { headers })
     .then(async ({ data }) => {
       if(data[0].order_status ===  "PAID"){
         let docref = doc(collection(db, 'orders'), paymentResp.orderid);
