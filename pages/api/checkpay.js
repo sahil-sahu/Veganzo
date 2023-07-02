@@ -7,7 +7,7 @@ sdk.server('https://sandbox.cashfree.com/pg');
 export default function handler(req, res) {
   let paymentResp = {
     orderid: req.body.data?.link_id,
-    status: req.body.data?.order.transaction_status,
+    status: req.body.data?.order_status,
     phone: req.body.data?.customer_details.customer_phone,
   };
   if(paymentResp.status === 'SUCCESS' && paymentResp.orderid){
