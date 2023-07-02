@@ -10,7 +10,7 @@ export default function handler(req, res) {
     status: req.body.data?.order_status,
     phone: req.body.data?.customer_details.customer_phone,
   };
-  if(paymentResp.status === 'SUCCESS' && paymentResp.orderid){
+  if(paymentResp.status === "PAID" && paymentResp.orderid){
     // check
     sdk.getPaymentLinkOrders({
       link_id: paymentResp.orderid,
