@@ -1,5 +1,5 @@
 import styles from "./category/cat.module.css"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { add } from "../redux/cart";
 
@@ -10,8 +10,12 @@ export default function ItemCard(props){
 
     const [count, setCount] = useState(1);
     const e = props.item;
-    const [ratio, setRatio] = useState(!!e.category.length? e.category[0]: {ratio:1});
+    const [ratio, setRatio] = useState({ratio:1});
     let stock = '...loading';
+
+    useEffect(() =>{
+        setRatio(!!e.category.length? e.category[0]: {ratio:1});
+    },[e.id]);
 
     
 

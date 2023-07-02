@@ -22,19 +22,22 @@ export default function Search({mainData, q}) {
     const [results, setResult] = useState(mainData);
     const [search, setSearch] = useState(q);
     
-    if(router.query.q != search){
-      let query = router.query.q;
-      (async function(){
-        let data = await typesense.collections('inventory').documents().search({
-          'q': query,
-          'query_by'  : 'name, type',
-        });
-        setResult(data.hits.map((e)=>{
-          return { id : e.document.id, name: e.document.name, img:e.document.cover, price:"120", unit:"kg", type: e.document.type, catgory: JSON.stringify(e.document.catgory), }
-        }));
-        setSearch(query);
-      }())
-    }
+    useEffect(()=>{
+      if(router.query.q != search){
+        let query = router.query.q;
+        // setResult
+        (async function(){
+          let data = await typesense.collections('inventory').documents().search({
+            'q': query,
+            'query_by'  : 'name, type',
+          });
+          setResult(data.hits.map((e)=>{
+            return { id : e.document.id, name: e.document.name, img:e.document.cover, price:"120", unit:"kg", type: e.document.type, catgory: JSON.stringify(e.document.catgory), }
+          }));
+          setSearch(query);
+        }())
+      }
+    },[router.query.q]);
 
   return (
     <>

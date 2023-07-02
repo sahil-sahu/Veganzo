@@ -8,6 +8,7 @@ import fetchAddress from '../../components/accounts/helper';
 import { useDispatch, useSelector } from 'react-redux';
 import { decrement } from '../../redux/cart';
 import { useEffect, useRef, useState } from 'react';
+import { Spinner } from "@material-tailwind/react";
 
 export default function Home() {
 
@@ -20,20 +21,22 @@ export default function Home() {
   const [open, setAdd] = useState(0);
   const [add ,setAddress] = useState(false);
   const paymentLoad = useRef({payment: "upi"})
+  const [placeClicked, setOrder] = useState(true);
   const router = useRouter();
 
   const placeOrder = async () =>{
+    setOrder(false);
     const payload ={
       userID: id,
       userPhone: phone,
       cart: cart,
       paymentMode: paymentLoad.current.payment,
       address: paymentLoad.current.address,
-      stores: [storeDB.vegetables.storeinfo.name, storeDB.fruits.storeinfo.name, storeDB.beverages.storeinfo.name],
+      stores: [storeDB.vegetables.storeinfo?.name, storeDB.fruits.storeinfo?.name, storeDB.beverages.storeinfo?.name],
       storeids: {
-        vegetables: storeDB.vegetables.storeinfo.name,
-        fruits: storeDB.fruits.storeinfo.name,
-        beverages: storeDB.beverages.storeinfo.name
+        vegetables: [storeDB.vegetables.storeinfo?.name, 0],
+        fruits: [storeDB.fruits.storeinfo?.name, 0],
+        beverages: [storeDB.beverages.storeinfo?.name, 0],
       },
     }
     if(paymentLoad.current.address && paymentLoad.current.address && cart.length > 0){
@@ -51,6 +54,7 @@ export default function Home() {
 
       } else{
         console.log("Chud gaya");
+        setOrder(true);
       }
     }
   }
@@ -213,9 +217,13 @@ export default function Home() {
                         </h4>
                         {open === 2 && <>
                           
-                          <Button onClick={placeOrder} variant="outlined" className="rounded-full">
+                          {
+                            placeClicked? <Button onClick={placeOrder} variant="outlined" className="rounded-full">
                             Place Order
-                          </Button>
+                          </Button>: <Button variant="outlined" className="rounded-full">
+                                        please wait <Spinner />
+                                      </Button>
+                          }
                         
                         </>}
                       </div>

@@ -58,14 +58,21 @@ function addOrdertoDB(json){
         let total = 0;
         for (const e of json.cart) {
             let invtRef = doc(db, `inventory/${e.type}/stack/${e.id}`) ;
-            let storeRef = doc(db, `store/${json.storeids[e.type]}/${e.type}/${e.id}`);
+            let storeRef = doc(db, `store/${json.storeids[e.type][0]}/${e.type}/${e.id}`);
             let invtsnap = await getDoc(invtRef);
             let storesnap = await getDoc(storeRef);
-    
-           if(storesnap.data().quantity > 0){
-                total += storesnap.data().price*searchIdInArray(invtsnap.data().catgories, e.category.id)*e.quantity;
+            
+            if(storesnap.data().quantity > 0){
+              total += storesnap.data().price*searchIdInArray(invtsnap.data().catgories, e.category.id)*e.quantity;
+              json.storeids[e.type][1] = 1;
            }
         };
+        //just eliminating the stores which are not used in cart
+        let stores = [];
+        for (const store of Object.keys(json.storeids)) {
+          if(json.storeids[store][1] > 0)
+            stores.push(json.storeids[store][0]);
+        }
         //done with totaling cart cost
         let order = await addDoc(collection(db, "orders"), {
             userID: json.userID,
@@ -76,7 +83,7 @@ function addOrdertoDB(json){
             cart: json.cart,
             payStatus: "pending",
             delivery: "waiting",
-            stores: json.stores
+            stores,
         })
        resolve({id : order.id, total});
     });
