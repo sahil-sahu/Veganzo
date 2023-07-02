@@ -3,7 +3,7 @@ import { db } from "../../firebase/admin-config";
 import axios from "axios";
 const sdk = require('api')('@cashfreedocs-new/v3#173cym2vlivg07d0');
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
   let paymentResp = {
     orderid: req.body.data?.link_id,
     status: req.body.data?.order.transaction_status,
@@ -17,6 +17,8 @@ export default function handler(req, res) {
     //   'x-client-secret': process.env.CASHSECRET,
     //   'x-api-version': '2022-09-01'
     // })
+
+
     const url = `https://sandbox.cashfree.com/pg/links/${paymentResp.orderid}/orders`;
     const headers = {
       'accept': 'application/json',
@@ -25,21 +27,24 @@ export default function handler(req, res) {
       'x-client-secret': process.env.CASHSECRET,
       'x-api-version': '2022-09-01'
     };
+    console.log('making a request');
+  // Make the GET request using Axios
 
-// Make the GET request using Axios
-    axios.get(url, { headers })
-    .then(async ({ data }) => {
-      if(data[0].order_status ===  "PAID"){
-        let docref = doc(collection(db, 'orders'), paymentResp.orderid);
-        console.log("Updated order");
-        await updateDoc(docref, {
-          payStatus: "PAID",
-          orderid: data[0].order_id, 
-        });
-        sendsms(paymentResp.phone ,paymentResp.orderid);
-      }
-    })
-    .catch(err => console.error(err));
+    let response = await axios.get(url, { headers });
+    let data = response.data;
+    console.log(data);
+    if(data[0].order_status ===  "PAID"){
+      let docref = doc(collection(db, 'orders'), paymentResp.orderid);
+      console.log("Updated order");
+      await updateDoc(docref, {
+        payStatus: "PAID",
+        orderid: data[0].order_id, 
+      });
+      sendsms(paymentResp.phone ,paymentResp.orderid);
+      return res.status(200).json({"success": "Sab Changasi"});
+    }
+
+    return res.status(200).json({"error": "Fault at making request to cashfree"});
   }
 
 
