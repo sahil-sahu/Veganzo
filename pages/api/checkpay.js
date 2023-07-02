@@ -2,7 +2,6 @@ import { collection, doc, updateDoc} from "firebase/firestore";
 import { db } from "../../firebase/admin-config";
 import axios from "axios";
 const sdk = require('api')('@cashfreedocs-new/v3#173cym2vlivg07d0');
-sdk.server('https://sandbox.cashfree.com/pg');
 
 export default function handler(req, res) {
   let paymentResp = {
