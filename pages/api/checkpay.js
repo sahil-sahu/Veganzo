@@ -9,6 +9,7 @@ export default async function handler(req, res) {
     status: req.body.data?.order.transaction_status,
     phone: req.body.data?.customer_details.customer_phone,
   };
+  // console.log(req.body);
   if(paymentResp.status === 'SUCCESS' && paymentResp.orderid){
     // check
     // sdk.getPaymentLinkOrders({
@@ -19,8 +20,9 @@ export default async function handler(req, res) {
     // })
 
 
-    const url = `https://sandbox.cashfree.com/pg/links/${paymentResp.orderid}/orders`;
-    const headers = {
+    try {
+      const url = `https://sandbox.cashfree.com/pg/links/${paymentResp.orderid}/orders`;
+      const headers = {
       'accept': 'application/json',
       'x-api-version': '2022-09-01',
       'x-client-id': process.env.CASHID,
@@ -32,7 +34,6 @@ export default async function handler(req, res) {
 
     let response = await axios.get(url, { headers });
     let data = response.data;
-    console.log(data);
     if(data[0].order_status ===  "PAID"){
       let docref = doc(collection(db, 'orders'), paymentResp.orderid);
       console.log("Updated order");
@@ -43,8 +44,9 @@ export default async function handler(req, res) {
       sendsms(paymentResp.phone ,paymentResp.orderid);
       return res.status(200).json({"success": "Sab Changasi"});
     }
-
+  } catch(error){
     return res.status(200).json({"error": "Fault at making request to cashfree"});
+  }
   }
 
 

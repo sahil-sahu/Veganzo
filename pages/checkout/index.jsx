@@ -9,20 +9,32 @@ import { useDispatch, useSelector } from 'react-redux';
 import { decrement } from '../../redux/cart';
 import { useEffect, useRef, useState } from 'react';
 import { Spinner } from "@material-tailwind/react";
+import { addLocation } from "../../redux/cart";
 
 export default function Home() {
 
   const cart = useSelector(state => state.cart.cart);
+  const currentLoco = useSelector(state => state.cart.location);
   const storeDB = useSelector(state => state.locationDB);
   const addresses = useSelector(state => state.authCheck.address);
   const {auth, id, phone} = useSelector(state => state.authCheck);
   const dispatch = useDispatch();
   const [total, setTotal] = useState('');
-  const [open, setAdd] = useState(0);
-  const [add ,setAddress] = useState(false);
+  const [open, setAdd] = useState(0); //section kholne wala
+  const [add ,setAddress] = useState(false); //new address wala
+  const [location, setLocation] = useState();
   const paymentLoad = useRef({payment: "upi"})
   const [placeClicked, setOrder] = useState(true);
   const router = useRouter();
+
+  const collect = async (e)=>{
+    e.preventDefault();
+    if (currentLoco.id !== location.id) {
+      dispatch(addLocation(location));
+    }
+    paymentLoad.current.address = location.item;
+    setTimeout(()=> setAdd(2), 1000);
+  }
 
   const placeOrder = async () =>{
     setOrder(false);
@@ -39,7 +51,7 @@ export default function Home() {
         beverages: [storeDB.beverages.storeinfo?.name, 0],
       },
     }
-    if(paymentLoad.current.address && paymentLoad.current.address && cart.length > 0){
+    if(paymentLoad.current.address && cart.length > 0){
       let response = await fetch('/api/checkout', {
         method: 'POST',
         headers: {
@@ -137,6 +149,9 @@ export default function Home() {
                         <h4>
                           Select delivery address
                         </h4>
+                        {
+                          paymentLoad.current.address && <p>selected: {paymentLoad.current.address.name}</p>
+                        }
                         {open === 0 && <>
                         <form>
                         {
@@ -146,7 +161,16 @@ export default function Home() {
                                           key={ele.id}
                                           name={`description`}
                                           id={`address${ele.id}`}
-                                          onChange={()=>{ paymentLoad.current.address = ele; setTimeout(()=> setAdd(1), 1000);}}
+                                          onChange={()=>{ 
+                                            setLocation({
+                                              lng: ele.location[0],
+                                              lat: ele.location[1],
+                                              name: '...fetching',
+                                              set: true,
+                                              id: ele.id,
+                                              item: ele,
+                                            })
+                                          }}
                                           label={
                                           <div>
                                               <Typography color="teal" className="font-medium">{ele.name}</Typography>
@@ -189,14 +213,14 @@ export default function Home() {
                               id: new Date().getTime(),
                             }} />
                           }
-                          <button style={{display:'block'}} className="btn btn-default" type="submit">
+                          <button onClick={collect} style={{display:'block'}} className="btn btn-default" type="submit">
                             use this address
                           </button>
                         </form>
                         </>}
                       </div>
                     </div>
-                    <div onClick={()=> setAdd(1)} className={styles.slide}>
+                    {/* <div onClick={()=> setAdd(1)} className={styles.slide}>
                       <div className={styles.line2}><div className={styles.radio}></div></div>
                       <div className={styles.content}>
                         <h4>
@@ -208,7 +232,7 @@ export default function Home() {
                         
                         </>}
                       </div>
-                    </div>
+                    </div> */}
                     <div onClick={()=> setAdd(2)} className={styles.slide}>
                       <div className={styles.line3}><div className={styles.radio}></div></div>
                       <div className={styles.content}>

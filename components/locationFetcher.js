@@ -18,6 +18,7 @@ export async function callLocoDB(lng, lat){
 
             } else {
                 console.log('Postal Code not found.');
+                store.dispatch(pinCode('Unavailable'));
             }
             } else {
             console.log('No results found.');

@@ -15,7 +15,7 @@ export default async function handler(req, res) {
                 customer_name: json.address.name
                     },
             link_meta: {
-              return_url: 'http://localhost:3000/'
+              return_url: `http://localhost:3000/account/orders/${order.id}`
             },                    
             link_notify: {send_sms: false, send_email: false},
             link_notes: {newKey: 'New Value'},
@@ -31,7 +31,6 @@ export default async function handler(req, res) {
             'x-client-secret': process.env.CASHSECRET,
             'x-api-version': '2022-09-01'
             })
-            console.log(order_res);
             return res.status(200).json({ paymentlink: order_res.data.link_url });    
         
       }
