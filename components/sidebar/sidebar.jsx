@@ -81,12 +81,14 @@ export default function Sidebar(props){
                 <ListItemText primary="Dashboard" />
             </ListItemButton>
           </Link>
-          <ListItemButton>
-            <ListItemIcon>
-              <ShoppingCartIcon />
-            </ListItemIcon>
-            <ListItemText primary="Orders" />
-          </ListItemButton>
+          <Link href={`/orders`}>
+            <ListItemButton>
+              <ListItemIcon>
+                <ShoppingCartIcon />
+              </ListItemIcon>
+              <ListItemText primary="Orders" />
+            </ListItemButton>
+          </Link>
           <ListItemButton>
             <ListItemIcon>
               <PeopleIcon />

@@ -2,8 +2,17 @@
 import './globals.css'
 import store from '../redux/store'
 import { Provider } from 'react-redux'
+import { useEffect } from 'react'
+import { callordersDB } from 'components/helpers/getOrders'
 
 export default function RootLayout({ children }) {
+
+  useEffect(()=>{
+    if(store.getState().orders.orders.length == 0){
+      callordersDB();
+    }
+  }, []);
+
   return (
     <html lang="en">
       {/*

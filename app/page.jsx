@@ -5,7 +5,8 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Chart from './Chart';
 import Deposits from './Deposits';
-import Orders from './Orders';
+import Orders from './orders/Orders';
+import Link from 'next/link';
 
 import Boiler from './boiler';
 
@@ -43,7 +44,10 @@ export default function Dashboard() {
               {/* Recent Orders */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Orders />
+                  <Orders limit={10} />
+                  <Link color="primary" href="/orders" sx={{ mt: 3 }}>
+                    See more orders
+                  </Link>
                 </Paper>
               </Grid>
             </Grid>

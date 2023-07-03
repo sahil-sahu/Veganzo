@@ -5,7 +5,8 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Title from './Title';
+import Title from '../Title';
+import { useSelector } from 'react-redux';
 
 // Generate Order Data
 function createData(id, date, name, shipTo, paymentMethod, amount) {
@@ -52,7 +53,14 @@ function preventDefault(event) {
   event.preventDefault();
 }
 
-export default function Orders() {
+export default function Orders(props) {
+
+  var orders = useSelector(state => state.orders.orders);
+  let limit = props.limit? props.limit : false;
+  if(limit){
+    orders = orders.slice(0, limit);
+  }
+
   return (
     <React.Fragment>
       <Title>Recent Orders</Title>
@@ -62,25 +70,20 @@ export default function Orders() {
             <TableCell>Date</TableCell>
             <TableCell>Name</TableCell>
             <TableCell>Ship To</TableCell>
-            <TableCell>Payment Method</TableCell>
             <TableCell align="right">Sale Amount</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell>{row.date}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.shipTo}</TableCell>
-              <TableCell>{row.paymentMethod}</TableCell>
-              <TableCell align="right">{`$${row.amount}`}</TableCell>
+          {orders.map((row, i) => (
+            <TableRow key={row.ref.id}>
+              <TableCell>{row.time}</TableCell>
+              <TableCell>{row.phone}</TableCell>
+              <TableCell><Link target='_blank' href={`https://www.google.co.in/maps/place/${row.address.location[1]}N+${row.address.location[0]}E`} >📍</Link></TableCell>
+              <TableCell align="right">{`₹${row.total}`}</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-      <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
-        See more orders
-      </Link>
     </React.Fragment>
   );
 }

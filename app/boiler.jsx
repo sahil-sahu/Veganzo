@@ -14,7 +14,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import Sidebar from '../components/sidebar/sidebar';
 import Chart from './Chart';
 import Deposits from './Deposits';
-import Orders from './Orders';
+import Orders from './orders/Orders';
 
   const drawerWidth = 240;
   
