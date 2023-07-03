@@ -41,7 +41,8 @@ export default async function handler(req, res) {
         payStatus: "PAID",
         orderid: data[0].order_id, 
       });
-      sendsms(paymentResp.phone ,paymentResp.orderid);
+      let sms_response = await sendsms(paymentResp.phone ,paymentResp.orderid);
+      console.log(sms_response);
       return res.status(200).json({"success": "Sab Changasi"});
     }
   } catch(error){
@@ -69,10 +70,12 @@ const headers = {
   'X-API-Key': process.env.SMSKEY,
   'Content-Type': 'application/json',
 };
-axios.post(process.env.SMSURL, JSON.stringify({
-  phone_number: `+91${phone}`,
-  orderid,
-}), { headers })
-console.log("SMS Sent");
+  return new Promise(async (resolve, reject) => {
+    let res = await axios.post(process.env.SMSURL, JSON.stringify({
+      phone_number: `+91${phone}`,
+      orderid,
+    }), { headers })
+    return resolve(await res.json());
+  });
 
 }
