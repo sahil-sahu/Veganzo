@@ -262,8 +262,33 @@ export default function Header(props){
         recognition.start();
       };
 
+    useEffect(()=>{
+        window.myscroll = 0;
+        window.myscrollnav = 0;
+
+        let mynav = document.getElementById("mynav");
+        let mymain = document.getElementById("main");
+        if(window.innerWidth < 551){
+            setInterval(() => window.myscroll = mymain.scrollTop, 500);
+            mymain.onscroll = (event) => {
+                window.myscrollnav = event.currentTarget.scrollTop - window.myscroll > 0 ? window.myscrollnav+=5:window.myscrollnav-=10;
+                if(window.myscrollnav>=0 && window.myscrollnav < 61){
+                    mynav.style.transform = `translateY(-${window.myscrollnav}px)`
+                } else{
+                    if (window.myscrollnav<0) {
+                        window.myscrollnav = 0;
+                    } else {
+                        window.myscrollnav = 60;
+                    }
+                }
+            }
+        }
+
+    },[])  
+
     return(
-        <header className={styles.Navbar}>
+        <>
+        <header id="mynav" className={styles.Navbar}>
             <nav>
                 <div className={styles.brand}>
                     <Link href={'/'}>V<span>E</span>GANZO</Link>
@@ -326,30 +351,19 @@ export default function Header(props){
                 }}>
                     <div className={styles.upToggle} style={
                         (navbarOpen? {
-                            transform: "translateY(300%) rotate(45deg)",
+                            transform: "translateY(250%) rotate(45deg)",
                         } : {transform: "unset",})
                     }></div>
                     <div className={styles.midToggle} style={
                         (navbarOpen? {
-                            visibility: "hidden",
-                        } : {visibility: "unset",})
+                            scale: 0,
+                        } : {width: "unset",})
                     }></div>
                     <div className={styles.downToggle} style={
                         (navbarOpen? {
                             transform: "translateY(-250%) rotate(-45deg)",
                         } : {transform: "unset",})
                     }></div>
-                </div>
-                <div className={styles.bottomBar} style={
-                    (navbarOpen? {
-                        top: 'calc(100vh)',
-                    } : {top: 'calc(100vh - 2rem)',})
-                }>
-                    <ul>
-                        <li><a href="">yo</a></li>
-                        <li><a href="">bro</a></li>
-                        <li><a href="">yup</a></li>
-                    </ul>
                 </div>
             </nav>
             <div className={styles.toggleContainer} style={style} onClick={()=>{
@@ -429,6 +443,18 @@ export default function Header(props){
             {pickBox && <PickBox open={setPickBox} /> }
         <div id={styles.captcha} className={styles.captcha}></div>       
         </header>
+        <div className={styles.bottomBar} style={
+                (navbarOpen? {
+                    top: 'calc(100vh)',
+                } : {top: 'calc(100vh - 2rem)',})
+        }>
+            <ul>
+                <li><Link className={styles.cart} href="/checkout"><Image width={25} height={25} src={"/header/cart.svg"} alt="❤️" /><span>CART</span>{cartCount>0 && <span className={styles.cartCounter}>{cartCount}</span>}</Link></li>
+                <li onClick={()=> setProfile(true)}  className={styles.profile}><Image width={25} height={25} src={"/header/profile.svg"} alt="❤️"></Image><span>{login.auth?`PROFILE`: `SIGN IN`}</span></li>
+                <li onClick={()=> setPickBox(true)}  className={styles.location}><Image width={25} height={25} src={"/header/blackLocation.png"} alt="📍"></Image><span>{pickup}</span></li>
+            </ul>
+        </div>    
+        </>
     )
 }
 

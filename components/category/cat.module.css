@@ -100,16 +100,23 @@
     /* border: #000 solid 1px; */
     width: auto;
 }
-.grid{
+/* .grid{
     display: grid;
     position: relative;
     grid-template-columns: auto;
     width: 100%;
     align-items: flex-end;
     justify-content: space-between;
-    /* border: #000 solid 1px; */
     padding-left: 5px;
     gap: .5rem;
+} */
+
+.grid{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 5px;
+    /* gap: 1%; */
+    /* line-height: 1.3rem; */
 }
 
 .grid p{
@@ -144,6 +151,18 @@
 .add2Cart:hover{
     box-shadow: inset 0 0 5px rgba(0,0,0,.3);
 }
+
+.add2Cart.clicked{
+    background-color: #ACEEB0;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.add2Cart.clicked span::after{
+    position: absolute;
+    content: "ED";
+}
+
 
 .quantity{
     border-radius: 10px;
@@ -264,9 +283,13 @@
     }
 
     .cardImg{
-        width: 90%;
+        width: 5rem;
         height: auto;
         padding: 5px;
+    }
+
+    .options{
+        padding: 0 5px;
     }
 
     .itemCard h4{
@@ -280,18 +303,16 @@
     }
 
     .quantity{
-        border-radius: 10px;
-        background-color: #DFDFDF;
-        display: flex;
-        justify-content: space-between;
-        padding: 5px;
-        height: 2.5rem;
+        border-radius: 6px;
+        padding: 3px;
+        height: 2rem;
         width: 100%;
-        text-align: center;
-        font-weight: 700;
-        align-items: center;
-        margin: 1rem 0;
+        margin: 5px 0;
         margin-bottom: 0;
+    }
+
+    .quantity > *{
+        border-radius: 6px;
     }
 
     .category{

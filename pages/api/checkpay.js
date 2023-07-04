@@ -72,10 +72,10 @@ const headers = {
 };
   return new Promise(async (resolve, reject) => {
     let res = await axios.post(process.env.SMSURL, JSON.stringify({
-      phone_number: `+91${phone}`,
+      phone_number : `+91${phone}`,
       orderid,
     }), { headers })
-    return resolve(await res.json());
+    return resolve(res.data);
   });
 
 }
