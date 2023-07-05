@@ -263,28 +263,28 @@ export default function Header(props){
       };
 
     useEffect(()=>{
-        window.myscroll = 0;
-        window.myscrollnav = 0;
+        let myscroll = 0;
+        let myscrollnav = 0;
 
         let mynav = document.getElementById("mynav");
-        let mymain = document.getElementById("main");
+        let mymain = window;
         if(window.innerWidth < 551){
-            setInterval(() => window.myscroll = mymain.scrollTop, 500);
+            setInterval(() => myscroll = mymain.scrollY, 500);
             mymain.onscroll = (event) => {
-                window.myscrollnav = event.currentTarget.scrollTop - window.myscroll > 0 ? window.myscrollnav+=5:window.myscrollnav-=10;
-                if(window.myscrollnav>=0 && window.myscrollnav < 61){
-                    mynav.style.transform = `translateY(-${window.myscrollnav}px)`
+                myscrollnav = event.currentTarget.scrollY - myscroll > 0 ? myscrollnav+=5:myscrollnav-=10;
+                if(myscrollnav>=0 && myscrollnav < 61){
+                    mynav.style.transform = `translateY(-${myscrollnav}px)`
                 } else{
-                    if (window.myscrollnav<0) {
-                        window.myscrollnav = 0;
+                    if (myscrollnav<0) {
+                        myscrollnav = 0;
                     } else {
-                        window.myscrollnav = 60;
+                        myscrollnav = 60;
                     }
                 }
             }
         }
 
-    },[])  
+    })  
 
     return(
         <>
@@ -445,8 +445,8 @@ export default function Header(props){
         </header>
         <div className={styles.bottomBar} style={
                 (navbarOpen? {
-                    top: 'calc(100vh)',
-                } : {top: 'calc(100vh - 2rem)',})
+                    bottom: '-10%',
+                } : {bottom: '0%',})
         }>
             <ul>
                 <li><Link className={styles.cart} href="/checkout"><Image width={25} height={25} src={"/header/cart.svg"} alt="❤️" /><span>CART</span>{cartCount>0 && <span className={styles.cartCounter}>{cartCount}</span>}</Link></li>

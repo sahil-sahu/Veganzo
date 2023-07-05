@@ -58,7 +58,7 @@ export default function ItemCard(props){
                         <select onChange={(k)=>{ setRatio(e.category[k.target.value])}}>
                             {
                                 e.category.map((e,i) =>{
-                                    return <option value={i}>{e.name}</option>;
+                                    return <option key={e.id} value={i}>{e.name}</option>;
                                 })
                             }
                         </select>

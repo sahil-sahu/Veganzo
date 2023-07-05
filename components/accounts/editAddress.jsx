@@ -1,7 +1,7 @@
 import styles from './address.module.css';
 import { useEffect, useState, useRef } from 'react';
 import mapboxgl from "mapbox-gl"; 
-import 'mapbox-gl/src/css/mapbox-gl.css';
+import 'mapbox-gl/dist/mapbox-gl.css';
 import { database } from '../../firebase/config';
 import { collection, doc, setDoc } from 'firebase/firestore';
 import { useSelector } from 'react-redux';

@@ -31,25 +31,30 @@ export const cartSlice = createSlice({
       } else{
         state.cart[index].quantity += action.payload.quantity;
       }
-      // state.cart = 
+      localStorage.setItem('cart', JSON.stringify(state.cart));
     },
     decrement: (state, action) => {
       let i = action.payload.index;
       state.cart[i].quantity += action.payload.quantity;
       if(state.cart[i].quantity == 0)
-          state.cart.splice(i, 1);
+        state.cart.splice(i, 1);
+      localStorage.setItem('cart', JSON.stringify(state.cart));
     },
     addLocation: (state,action) => {
       state.location = action.payload;
       callLocoDB(state.location.lng, state.location.lat);
+      localStorage.setItem('location', JSON.stringify(state.location));
     },
     pinCode: (state,action) => {
       state.location.name = action.payload;
+      localStorage.setItem('location', JSON.stringify(state.location));
     },
+    cartLoader: (state,action) => {state.cart = JSON.parse(action.payload);},
+    gpsLoader: (state,action) => {state.location = JSON.parse(action.payload);},
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { add, decrement, addLocation, pinCode } = cartSlice.actions
+export const { add, decrement, addLocation, pinCode, cartLoader, gpsLoader } = cartSlice.actions
 
 export default cartSlice.reducer

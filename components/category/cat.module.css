@@ -51,7 +51,7 @@
     justify-content: center;
     display: flex;
     flex-direction: column;
-    gap: .5rem;
+    gap: 2px;
     margin: 5% 0;
     font-family: 'Orbitron', sans-serif;
     font-size: .9rem;
@@ -210,13 +210,13 @@
     }
 
     .itemCard{
-        /* min-width: 1rem; */
+        min-width: 11rem;
         width: 100%;
         font-size: .9rem;
     }
 
     .cardImg{
-        width: 90%;
+        width: 10rem;
         height: auto;
         padding: 5px;
     }
@@ -260,9 +260,10 @@
 @media only screen and (max-width: 550px){
 
     .cardContainer{
-        width: 100%;
+        width: 96%;
         min-width: 16rem;
-        margin: auto 2px;
+        margin: auto;
+        /* padding: 5px; */
         
     }
     .card{
@@ -283,7 +284,7 @@
     }
 
     .cardImg{
-        width: 5rem;
+        width: 6rem;
         height: auto;
         padding: 5px;
     }

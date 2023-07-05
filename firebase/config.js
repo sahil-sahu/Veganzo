@@ -34,7 +34,7 @@ onAuthStateChanged(auth, async (user) => {
         const uid = user.uid;
         try {
           const docref = doc(database, 'users', uid);
-          console.log('bro')
+          console.log('authenticated')
           const docSnap = await getDoc(docref);
           store.dispatch(authCheckSlice.actions.load({
               auth: true,

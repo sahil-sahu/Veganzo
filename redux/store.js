@@ -15,16 +15,14 @@ const reducers = combineReducers({
   locationDB: locationDBReducer,
 });
 
-const persistConfig = {
-  key: 'root',
-  storage,
-  blacklist: ['authCheck', 'locationDB'],
-};
+// const persistConfig = {
+//   key: 'root',
+//   storage,
+//   blacklist: ['authCheck', 'locationDB'],
+// };
 
-const persistedReducer = persistReducer(persistConfig, reducers);
+// const persistedReducer = persistReducer(persistConfig, reducers);
 
 export default configureStore({
-  reducer: persistedReducer,
-  devTools: process.env.NODE_ENV !== 'production',
-  middleware: [thunk],
-});
+  reducer: reducers,
+})
