@@ -31,7 +31,7 @@ export default function ItemCard(props){
             type,
         }));
         setCount(1);
-        setTimeout(() => setanimation(''), 1500);
+        setTimeout(() => setanimation(''), 2000);
     }
 
     const type = e.type? e.type: 'dummy';

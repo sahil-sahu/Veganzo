@@ -159,8 +159,20 @@
 }
 
 .add2Cart.clicked span::after{
+    content: "";
     position: absolute;
-    content: "ED";
+    background-image: url('/icons/cart_anim.webp');
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: #fff;
+    border-radius: 600px;
+    border: 3px solid var(--yellow);
+    background-size: 75%;
+    transform: translate(-50%,-50%);
 }
 
 

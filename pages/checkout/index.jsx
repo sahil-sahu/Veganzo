@@ -22,13 +22,16 @@ export default function Home() {
   const [total, setTotal] = useState('');
   const [open, setAdd] = useState(0); //section kholne wala
   const [add ,setAddress] = useState(false); //new address wala
-  const [location, setLocation] = useState();
+  const [location, setLocation] = useState(false);
   const paymentLoad = useRef({payment: "upi"})
   const [placeClicked, setOrder] = useState(true);
   const router = useRouter();
 
   const collect = async (e)=>{
     e.preventDefault();
+    if (!location) {
+      return;
+    }
     if (currentLoco.id !== location.id) {
       dispatch(addLocation(location));
     }
@@ -173,13 +176,8 @@ export default function Home() {
                                           }}
                                           label={
                                           <div>
-                                              <Typography color="teal" className="font-medium">{ele.name}</Typography>
-                                              <Typography style={{
-                                                width: "15rem",
-                                                overflow: "hidden",
-                                                textOverflow: "ellipsis",
-                                                whiteSpace: "nowrap",
-                                              }} variant="small" color="gray" className="font-normal">
+                                              <Typography color="teal" className="font-medium ">{ele.name}</Typography>
+                                              <Typography variant="small" color="gray" className={`font-normal ${styles.txtadress}`}>
                                                   {ele.address}
                                               </Typography>
                                           </div>
@@ -213,7 +211,7 @@ export default function Home() {
                               id: new Date().getTime(),
                             }} />
                           }
-                          <button onClick={collect} style={{display:'block'}} className="btn btn-default" type="submit">
+                          <button onClick={collect} style={{display:'block'}} className={`btn btn-default ${styles.cnfmAdd}`} type="submit">
                             use this address
                           </button>
                         </form>
@@ -233,13 +231,13 @@ export default function Home() {
                         </>}
                       </div>
                     </div> */}
-                    <div onClick={()=> setAdd(2)} className={styles.slide}>
+                    <div onClick={()=> paymentLoad.current.address && setAdd(2)} className={styles.slide}>
                       <div className={styles.line3}><div className={styles.radio}></div></div>
                       <div className={styles.content}>
                         <h4>
                           Final Checkout
                         </h4>
-                        {open === 2 && <>
+                        {open === 2 && paymentLoad.current.address && <>
                           
                           {
                             placeClicked? <Button onClick={placeOrder} variant="outlined" className="rounded-full">

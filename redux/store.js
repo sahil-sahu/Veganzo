@@ -4,16 +4,16 @@ import cartReducer from './cart';
 import locationDBReducer from './locationDB';
 
 //Persistent store
-import storage from 'redux-persist/lib/storage';
+// import storage from 'redux-persist/lib/storage';
 import { combineReducers } from 'redux';
-import { persistReducer } from 'redux-persist';
-import thunk from 'redux-thunk';
+// import { persistReducer } from 'redux-persist';
+// import thunk from 'redux-thunk';
 
-const reducers = combineReducers({
-  authCheck: authCheckReducer,
-  cart: cartReducer,
-  locationDB: locationDBReducer,
-});
+// const reducers = combineReducers({
+//   authCheck: authCheckReducer,
+//   cart: cartReducer,
+//   locationDB: locationDBReducer,
+// });
 
 // const persistConfig = {
 //   key: 'root',
@@ -24,5 +24,9 @@ const reducers = combineReducers({
 // const persistedReducer = persistReducer(persistConfig, reducers);
 
 export default configureStore({
-  reducer: reducers,
+  reducer: {
+    authCheck: authCheckReducer,
+    cart: cartReducer,
+    locationDB: locationDBReducer,
+  },
 })

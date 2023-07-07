@@ -3,6 +3,7 @@
     padding-bottom: 5%;
     width: 100%;
     min-height: 100vh;
+    height: 100%;
     background-color: #fff;
     background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23aaaaaa' fill-opacity='0.4'%3E%3Cpath d='M50 50c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10zM10 10c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10S0 25.523 0 20s4.477-10 10-10zm10 8c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm40 40c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
@@ -53,6 +54,8 @@
 .cartContainer ul{
     padding: 1.5rem 0;
     display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
     flex-direction: column;
     gap: 1rem;
 }
@@ -172,4 +175,79 @@
     position: relative;
     padding-top: 18%;
     margin-bottom: 15%;
+}
+
+.txtadress{
+    width: 15rem;
+    overflow : hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+@media only screen and (max-width: 1000px){
+    .cartContainer{
+        flex-direction: column;
+        margin: auto;
+        width: fit-content;
+        padding: 5px;
+        font-size: 1rem;
+    }
+    .cart{
+        padding: 1rem;
+        padding-top: 20vh;
+    }
+    .cartContainer h3{
+        line-height: 2rem;
+        font-size: 2rem;
+        padding: 5px;
+    }
+
+    .cartNum > *{
+        width: unset;
+    }
+
+    .item p{
+        width: auto;
+    }
+
+    .spread{
+        gap: 5px;
+    }
+
+    .cartContainer li{
+        gap: 5px;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .slide{
+        gap: 1em;
+    }
+
+
+    .content{
+        margin: 1rem auto;
+    }
+
+    .spread{
+        width: fit-content;
+    }
+    
+    .cartTotal{
+        flex-direction: column;
+        align-items: flex-end;
+    }
+    
+    .txtadress{
+        width: 8rem;
+    }
+    .process h4{
+        font-size: 1.25rem;
+    }
+    .cnfmAdd{
+        border-radius: 600px;
+        border: #94b598 solid 2px;
+        padding: 5px 1rem;
+        margin: auto;
+    }
 }
