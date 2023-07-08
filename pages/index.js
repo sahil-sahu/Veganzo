@@ -9,6 +9,7 @@ import Blog from '../components/blog/blog';
 import Product from '../components/product/product';
 import Recipe from '../components/recipes/recipes';
 import Nursery from '../components/nursery/nursery';
+import Footer from "../components/footer/footer";
 
 import Header from '../components/header/header';
 
@@ -59,6 +60,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+        <Footer></Footer>
       </main>
     </>
   )

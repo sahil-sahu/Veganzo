@@ -57,6 +57,7 @@ export default function EditAddress(props){
     function setPosition(lat, lng){
         map.current.setCenter([lng,lat]);
         marker.current.setLngLat([lng,lat]);
+        setPickup([lng,lat]);
         setResults([]);
     }
 
@@ -82,15 +83,6 @@ export default function EditAddress(props){
         const liveLocation = document.createElement("div");
         liveLocation.className = "liveLocation";
 
-        // const searchJS = document.getElementById('search-js');
-        // const searchBox = new MapboxSearchBox();
-        // searchBox.options = {
-        //     language: 'en',
-        //     country: 'US',
-        //     };
-        // searchBox.accessToken = process.env.NEXT_PUBLIC_MAPBOX;
-        // map.addControl(searchBox);
-    
         // make a marker for each feature and add to the map
         new mapboxgl.Marker(liveLocation).setLngLat([lng, lat]).addTo(map.current);
         marker.current = new mapboxgl.Marker({ draggable: true })

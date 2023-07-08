@@ -78,7 +78,7 @@ export default function ItemCard(props){
                             />
                     </div>
                 </div>
-                {stock===true? <div onClick={addToCart} className={`${styles.add2Cart} ${animation}`}><span>ADD</span><img src="/icons/cart.png" alt="" /></div>: null}
+                {stock===true? <div><div onClick={addToCart} className={`${styles.add2Cart} ${animation}`}><span>ADD</span><img src="/icons/cart.png" alt="" /></div></div>: null}
             </div>
                 {stock===true? null: stock}
         </div>

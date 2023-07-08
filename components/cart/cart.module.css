@@ -157,7 +157,6 @@
 }
 
 .line .radio{
-    animation: breathing 2s infinite;
     border-radius: 100%;
     border: #94b598 solid 3px;
     background-color: #fff;
@@ -182,6 +181,13 @@
     overflow : hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+.cnfmAdd{
+    border-radius: 600px;
+    border: #94b598 solid 2px;
+    padding: 5px 1rem;
+    /* margin: auto; */
+    float: right;
 }
 
 @media only screen and (max-width: 1000px){
@@ -243,11 +249,5 @@
     }
     .process h4{
         font-size: 1.25rem;
-    }
-    .cnfmAdd{
-        border-radius: 600px;
-        border: #94b598 solid 2px;
-        padding: 5px 1rem;
-        margin: auto;
     }
 }

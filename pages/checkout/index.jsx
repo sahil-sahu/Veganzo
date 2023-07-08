@@ -36,7 +36,7 @@ export default function Home() {
       dispatch(addLocation(location));
     }
     paymentLoad.current.address = location.item;
-    setTimeout(()=> setAdd(2), 1000);
+    setTimeout(()=> setAdd(2), 0);
   }
 
   const placeOrder = async () =>{

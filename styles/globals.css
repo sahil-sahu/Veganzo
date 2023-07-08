@@ -198,4 +198,8 @@
   main{
     height: 110vh;
   }
+  .mapboxgl-map{
+    height: 100%;
+    width: 100%;
+  }
 }

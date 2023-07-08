@@ -1,16 +1,8 @@
 import styles from "../../styles/Home.module.css"
 import srchstyles from "../../components/search/search.module.css"
 
-import Head from 'next/head'
-import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { NextSeo } from 'next-seo';
-import Hero from '../../components/hero/hero';
-import Category from '../../components/category/category';
-import Blog from '../../components/blog/blog';
-import Product from '../../components/product/product';
-import Recipe from '../../components/recipes/recipes';
-import Nursery from '../../components/nursery/nursery';
 
 import Header from '../../components/header/header';
 import ItemCard from "../../components/card";
@@ -57,10 +49,6 @@ export default function Search({mainData, q}) {
                     })}
         </div>
         </section>
-        <Blog></Blog>
-        <Product></Product>
-        <Recipe></Recipe>
-        <Nursery></Nursery>
         <section className={styles.playstore}>
           <div className={styles.banda}>
             <img src="assets/banda.svg" alt="" />

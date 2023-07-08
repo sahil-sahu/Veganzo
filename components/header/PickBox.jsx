@@ -74,14 +74,11 @@ function PickBox(props){
                     id="customLocation"
                     onChange={()=> openCustom(true)}
                     label={
-                    <div>
+                    <div style={{width:"100%",}}>
                         <Typography color="teal" className="font-medium">Add Custom Location</Typography>
                         {customInput && <MapInput setLocation={setLocation} />}
                     </div>
                     }
-                    containerProps={{
-                    className: "-mt-5"
-                    }}
                 />
                 </div>
                 <Button onClick={collect} size="sm">Apply</Button>
@@ -120,6 +117,7 @@ function MapInput(props) {
     function setPosition(lat, lng){
         map.current.setCenter([lng,lat]);
         marker.current.setLngLat([lng,lat]);
+        setPickup([lng,lat]);
         setResults([]);
     }
 

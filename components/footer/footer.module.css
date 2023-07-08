@@ -1,0 +1,95 @@
+.footer{
+    width: 100%;
+    background: url("/assets/footerbg.webp");
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    padding: 2% 5%;
+}
+
+.footerContainer{
+    max-width: 90em;
+    margin: auto;
+    border: #000 solid 1px;
+    font-family: 'Open Sans', sans-serif;
+}
+.footerCard{
+    border: #000 solid .5px;
+    border-bottom: #000 solid 1px;
+    padding: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    flex-direction: column;
+    text-align: center;
+}
+.footerCard h3{
+    font-size: 2rem;
+    letter-spacing: -1px;
+    font-weight: 500;
+}
+.content button{
+    background: #EDF7F6;
+    border-radius: 10px;
+    padding: .75rem 1.25rem;
+    border: #000 solid 1px;
+}
+.socials{
+    display: flex;
+    justify-content: space-evenly;
+    gap: 1rem;
+}
+.links{
+    border: #000 solid 1px;
+}
+.linkContainer{
+    padding: 1rem;
+}
+.linkContainer h3{
+    font-family: 'Berlin Sans FB', Helvetica, sans-serif;
+    line-height: 2rem;
+    font-size: 1.5rem;
+    border-bottom: 2px solid #000;
+    padding: 2px 5px;
+    padding-right: 2rem;
+    width: fit-content;
+}
+.linkContainer li{
+    padding: 2px;
+}
+.copyright{
+    font-family: 'Amatic SC', cursive;
+    font-weight: 500;
+    font-size: 2.3rem;
+    text-align: center;
+    border: #000 solid 1px;
+}
+.trademark{
+    padding: 1rem;
+}
+@media only screen and (min-width: 1000px){
+    .trademark{
+        padding: 2rem;
+    }
+    .trademark img{
+        width: 75%;
+    }
+}
+
+@media only screen and (max-width: 1000px){
+    .footerCard h3{
+        font-size: 1.3rem;
+        letter-spacing: -1px;
+        font-weight: 500;
+    }
+    .footerCard{
+        padding: 3%;
+    }
+    .footer{
+        background-size: auto 100%;
+        padding-bottom: 4rem;
+    }
+    .copyright{
+        font-size: 1.5rem;
+    }
+}

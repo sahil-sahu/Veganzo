@@ -68,3 +68,18 @@
 .mapSearch input{
     padding: 5px .5rem;
 }
+
+@media only screen and (max-width: 550px){
+    .pickContainer{
+        border-radius: 15px;
+        padding: 1rem;
+        gap: .75rem;
+        width: 90%;
+        max-height: 80vh;
+    }
+    .pickContainer h3{
+
+        font-size: 2rem;
+    
+    }
+}
