@@ -13,7 +13,7 @@ const client = new Typesense.Client({
       'protocol': 'https'   // For Typesense Cloud use https
     }],
     'apiKey': process.env.NEXT_PUBLIC_TYPESENSE,
-    'connectionTimeoutSeconds': 2
+    'connectionTimeoutSeconds': 90
   })
 
 export {client as typesense};
