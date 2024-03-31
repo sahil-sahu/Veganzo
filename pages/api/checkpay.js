@@ -41,7 +41,7 @@ export default async function handler(req, res) {
         payStatus: "PAID",
         orderid: data[0].order_id, 
       });
-      let sms_response = await sendsms(paymentResp.phone ,paymentResp.orderid);
+      // let sms_response = await sendsms(paymentResp.phone ,paymentResp.orderid);
       console.log(sms_response);
       return res.status(200).json({"success": "Sab Changasi"});
     }

@@ -1,6 +1,6 @@
 import styles from "./cat.module.css"
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+import { typesense } from "../../typesense/config"
 import ItemCard from "../card";
 
 export default function Category(){
@@ -31,6 +31,25 @@ export default function Category(){
         },
     ]
 
+    const [veg, setVegetables] = useState([]);
+    const [fruits, setFruits] = useState([]);
+    const fetchItems = async (param) => {
+        let data = await typesense.collections('inventory').documents().search({
+            'q': param,
+            'query_by'  : 'name, type',
+            'per_page': 3
+        });
+        return data.hits.map((e)=>{
+            return { id : e.document.id, name: e.document.name, img:e.document.cover, price:"120", unit:"kg", type: e.document.type, catgory: JSON.stringify(e.document.catgory), }
+        })
+    }
+    useEffect(()=>{
+        (async function(){
+          setVegetables(await fetchItems("veg"));
+          setFruits(await fetchItems("fruits"));
+        }())
+    },[]);
+
     return(
         <section className={styles.category}>
             <div className={styles.container}>
@@ -49,7 +68,8 @@ export default function Category(){
             <div className={`${styles.fruits} ${styles.cardContainer}`} >
                 <h3 className="heading"><img src="/icons/orange.png" alt="orange" /><span><span className="up">F</span>RUITS</span></h3>
                 <div className={`${styles.cardContainer} grid grid-cols-2 md:gap-5 gap-2 sm:grid-cols-3`}>
-                    {item.map((e,i)=>{
+                    {fruits.map((e,i)=>{
+                        e.category = JSON.parse(e.catgory)
                         return(
                             <ItemCard key={i} item={e} />
                         );
@@ -59,7 +79,8 @@ export default function Category(){
             <div className={`${styles.vegetable} ${styles.cardContainer}`} >
                 <h3 className="heading"><img src="/icons/veggy.png" alt="vgegtable" /><span><span className="up">V</span>EGETABLES</span></h3>
                 <div className={`${styles.cardContainer} grid grid-cols-2 md:gap-5 gap-2 sm:grid-cols-3`}>
-                    {item.map((e,i)=>{
+                    {veg.map((e,i)=>{
+                        e.category = JSON.parse(e.catgory)
                         return(
                             <ItemCard key={i} item={e} />
                         );

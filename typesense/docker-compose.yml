@@ -1,0 +1,11 @@
+version: '3.7'
+services:
+  app:
+    image: veganzo_typesense
+    # image: sahilcoder1/vookadbackend
+    build: .
+    volumes:
+      - ./typesense-data:/data
+    ports:
+      - 8108:8108
+ 
