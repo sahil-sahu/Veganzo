@@ -7,13 +7,12 @@
 const Typesense = require('typesense')
 const client = new Typesense.Client({
     'nodes': [{
-      'host': 'api.veganzo.earth', // For Typesense Cloud use xxx.a1.typesense.net
-      // 'host': '13.48.71.171', // For Typesense Cloud use xxx.a1.typesense.net
-      'port': '444',      // For Typesense Cloud use 443
-      'protocol': 'https'   // For Typesense Cloud use https
+      'host': process.env.NEXT_PUBLIC_TYPESENSE_DOMAIN ?? "localhost", // For Typesense Cloud use xxx.a1.typesense.net
+      'port': '8108',      // For Typesense Cloud use 443
+      'protocol': 'http'   // For Typesense Cloud use https
     }],
     'apiKey': process.env.NEXT_PUBLIC_TYPESENSE,
-    'connectionTimeoutSeconds': 2
+    'connectionTimeoutSeconds': 90
   })
 
 export {client as typesense};
