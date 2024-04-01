@@ -18,8 +18,8 @@ export const sns = new AWS.SNS();
 
 export default async function handler(req, res) {
   let paymentResp = {
-    orderid: req.body.data?.link_id,
-    status: req.body.data?.order.transaction_status,
+    orderid: req.body.data?.order.order_tags.link_id,
+    status: req.body.data?.payment.payment_status,
     phone: req.body.data?.customer_details.customer_phone,
   };
   // console.log(req.body);
