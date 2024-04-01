@@ -6,11 +6,12 @@
  */
 const Typesense = require('typesense')
 const client = new Typesense.Client({
-    'nodes': [{
-      'host': process.env.NEXT_PUBLIC_TYPESENSE_DOMAIN || "localhost", // For Typesense Cloud use xxx.a1.typesense.net
-      'port': '443',      // For Typesense Cloud use 443
-      'protocol': 'https'   // For Typesense Cloud use https
-    }],
+  'nodes': [{
+    'host': process.env.NEXT_PUBLIC_TYPESENSE_DOMAIN ?? "veganzo-typesense.onrender.com", // For Typesense Cloud use xxx.a1.typesense.net
+    'port': process.env.NEXT_PUBLIC_TYPESENSE_PORT || 443,      // For Typesense Cloud use 443
+    // 'port': '8108',      // For Typesense Cloud use 443
+    'protocol': process.env.NEXT_PUBLIC_HTTP ||'https'   // For Typesense Cloud use https
+  }],
     'apiKey': process.env.NEXT_PUBLIC_TYPESENSE,
     'connectionTimeoutSeconds': 90
   })
