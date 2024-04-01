@@ -1,0 +1,44 @@
+version: '3.7'
+services:
+  typesense:
+    image: veganzo_typesense
+    # image: sahilcoder1/vookadbackend
+    build:
+      context: ./veganzo-web/typesense
+      dockerfile: Dockerfile
+    volumes:
+      - ./veganzo-web/typesense/typesense-data:/data
+    ports:
+      - 8108:8108
+  veganzoclient:
+    depends_on:
+      - typesense
+    image: veganzo_client:latest
+    environment:
+      - NEXT_PUBLIC_TYPESENSE_DOMAIN=typesense
+      - NEXT_PUBLIC_TYPESENSE_PORT=8108
+      - NEXT_PUBLIC_HTTP=HTTP
+    build:
+      context: ./veganzo-web
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+
+  veganzoadmin:
+    depends_on:
+      - typesense
+    image: veganzo_admin:latest
+    environment:
+      - NEXT_PUBLIC_TYPESENSE_DOMAIN=typesense
+      - NEXT_PUBLIC_TYPESENSE_PORT=8108
+      - NEXT_PUBLIC_HTTP=HTTP
+    build:
+      context: ./veganzo_admin_A
+      dockerfile: Dockerfile
+    ports:
+      - "5000:3000"
+
+networks:
+  veganzo:
+    driver: bridge         
+ 
