@@ -2,6 +2,19 @@ import { collection, doc, updateDoc} from "firebase/firestore";
 import { db } from "../../firebase/admin-config";
 import axios from "axios";
 const sdk = require('api')('@cashfreedocs-new/v3#173cym2vlivg07d0');
+const AWS = require('aws-sdk');
+
+// Set the AWS region
+AWS.config.update({ region: 'eu-north-1' });
+
+// Set your AWS access key ID, secret access key, and session token
+AWS.config.credentials = {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+};
+
+// Create an SNS object
+export const sns = new AWS.SNS();
 
 export default async function handler(req, res) {
   let paymentResp = {
@@ -41,8 +54,7 @@ export default async function handler(req, res) {
         payStatus: "PAID",
         orderid: data[0].order_id, 
       });
-      // let sms_response = await sendsms(paymentResp.phone ,paymentResp.orderid);
-      console.log(sms_response);
+      let sms_response = await sendsms(paymentResp.phone ,paymentResp.orderid);
       return res.status(200).json({"success": "Sab Changasi"});
     }
   } catch(error){
@@ -66,16 +78,27 @@ async function sendsms(phone, orderid){
 //       orderid,
 //     })
 // });
-const headers = {
-  'X-API-Key': process.env.SMSKEY,
-  'Content-Type': 'application/json',
-};
-  return new Promise(async (resolve, reject) => {
-    let res = await axios.post(process.env.SMSURL, JSON.stringify({
-      phone_number : `+91${phone}`,
-      orderid,
-    }), { headers })
-    return resolve(res.data);
-  });
+// const headers = {
+//   'X-API-Key': process.env.SMSKEY,
+//   'Content-Type': 'application/json',
+// };
+//   return new Promise(async (resolve, reject) => {
+//     let res = await axios.post(process.env.SMSURL, JSON.stringify({
+//       phone_number : `+91${phone}`,
+//       orderid,
+//     }), { headers })
+//     return resolve(res.data);
+//   });
+
+  sns.publish({
+    Message: `Order Placed\nGet updates at https://veganzo-git-web-sahilsahus-projects.vercel.app/account/orders/${orderid}`,  // Message to be sent
+    PhoneNumber: `+91${phone}`, // Phone number of the recipient
+}, (err, data) => {
+    if (err) {
+        console.error('Error sending message:', err);
+    } else {
+        console.log('Message sent successfully:', data.MessageId);
+    }
+  })
 
 }
